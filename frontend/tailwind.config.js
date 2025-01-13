@@ -1,7 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        custom: {
+          green: "#45A29E",
+          cyan: "#68FCF1",
+          gray: "#C5C6C7",
+          dark: "#1F2833",
+          black: "#0B0C10",
+        },
+      },
+    },
   },
   content: [
     "{srcDir}/components/**/*.{vue,js,jsx,mjs,ts,tsx}",
@@ -16,5 +26,5 @@ export default {
     "{srcDir}/app/spa-loading-template.html",
   ],
   plugins: [],
-  darkMode: 'class',
+  darkMode: "class",
 };
