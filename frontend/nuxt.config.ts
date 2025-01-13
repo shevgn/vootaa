@@ -9,4 +9,8 @@ export default defineNuxtConfig({
   alias: {
     "#tailwind-config": resolve("./tailwind.config"),
   },
+  colorMode: {
+    classSuffix: ''
+  }
+
 });

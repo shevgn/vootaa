@@ -16,4 +16,5 @@ export default {
     "{srcDir}/app/spa-loading-template.html",
   ],
   plugins: [],
+  darkMode: 'class',
 };
