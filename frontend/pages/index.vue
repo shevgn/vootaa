@@ -3,5 +3,8 @@
 <template>
   <div>
     <Header />
+    <ClientOnly>
+      <Chainweb />
+    </ClientOnly>
   </div>
 </template>
