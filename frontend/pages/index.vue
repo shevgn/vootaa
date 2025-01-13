@@ -2,9 +2,6 @@
 
 <template>
   <div>
-    <Header />
-    <ClientOnly>
-      <Chainweb />
-    </ClientOnly>
+    <Chainweb />
   </div>
 </template>
