@@ -2,7 +2,7 @@
 const colorMode = useColorMode();
 
 const toggleColorMode = () => {
-  colorMode.value = colorMode.value === "light" ? "dark" : "light";
+  colorMode.preference = colorMode.value === "light" ? "dark" : "light";
 };
 
 const icons: Record<string, string> = {
@@ -17,7 +17,9 @@ function getIcon<K extends keyof typeof icons>(name: K): (typeof icons)[K] {
 
 <template>
   <button @click="toggleColorMode" class="flex items-center group">
-    <UIcon :name="getIcon(colorMode.value)"
-      class="w-6 h-6 group-hover:bg-custom-green bg-custom-dark dark:bg-custom-cyan" />
+    <UIcon
+      :name="getIcon(colorMode.value)"
+      class="w-6 h-6 group-hover:bg-custom-green bg-custom-dark dark:bg-custom-cyan"
+    />
   </button>
 </template>
