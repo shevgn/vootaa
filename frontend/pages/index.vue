@@ -1,7 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <div class="flex">
     <Chainweb />
+    <Swap />
   </div>
 </template>
