@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <header class="flex flex-row p-2 items-center">
+  <header class="flex flex-row items-center">
     <svg
       class="w-12 h-12 mr-1"
       viewBox="0 0 500 500"
