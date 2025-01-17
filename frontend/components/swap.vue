@@ -34,12 +34,12 @@ const showTransactionHint = (): void => {
   <div class="w-full relative h-full px-8">
     <h2 class="sr-only">Swap block</h2>
     <div
-      class="border border-custom-cyan h-12 w-full flex rounded-md justify-between items-center text-2xl px-4 dark:text-custom-cyan text-custom-dark mb-4"
+      class="border border-custom-cyan h-12 w-full flex rounded-md justify-between items-center px-4 dark:text-custom-cyan text-custom-dark mb-4"
     >
       <h3 class="sr-only">Choose currency</h3>
       <span>Swap your</span>
       <span
-        class="bg-custom-cyan h-full flex items-center px-2 justify-between w-1/3 text-custom-dark"
+        class="bg-custom-cyan h-full flex items-center px-2 justify-between w-1/3 font-medium text-custom-dark"
       >
         <span> $VOOTAA </span>
         to
