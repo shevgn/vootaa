@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const amountForSwap: number[] = [10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0];
+const amountForSwap: number[] = [
+  10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 1660.0,
+];
 
 const percentageForSwap: number[] = [
   0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
@@ -51,6 +53,7 @@ const showTransactionHint = (): void => {
         <span class="text-red-400"> #8 </span>
       </span>
       <button
+        type="button"
         class="flex items-center border dark:border-custom-cyan rounded-md px-4"
       >
         <UIcon name="ic:baseline-swap-horiz" class="w-8 h-8" />
@@ -92,7 +95,10 @@ const showTransactionHint = (): void => {
             >
               <UIcon name="ic:baseline-question-mark" class="w-3 h-3" />
             </button>
-            <p v-if="minHintShown" class="absolute -top-2 left-6 text-xs">
+            <p
+              v-if="minHintShown"
+              class="absolute text-red-500 -top-2 left-6 text-xs"
+            >
               Limit the minimum amout to {{ amountForSwap[0] }}
             </p>
             <button
@@ -102,7 +108,10 @@ const showTransactionHint = (): void => {
             >
               <UIcon name="ic:baseline-question-mark" class="w-3 h-3" />
             </button>
-            <p v-if="maxHintShown" class="absolute -top-2 right-6 text-xs">
+            <p
+              v-if="maxHintShown"
+              class="absolute text-red-500 -top-2 right-6 text-xs"
+            >
               Limit to 1% of pool size
             </p>
             <button
