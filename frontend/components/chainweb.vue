@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="border border-cyan-400 rounded-md p-4 w-full h-full">
+  <div class="border dark:border-custom-cyan border-custom-dark rounded-md p-4 w-full h-full">
     <div class="flex justify-between text-lg font-semibold mb-4">
       <span class="dark:text-custom-cyan text-custom-dark">CHAINWEB</span>
       <span class="dark:text-custom-cyan text-custom-dark">
@@ -11,6 +11,6 @@
         </span>
       </span>
     </div>
-    <SvgChainweb class="w-full h-full" />
+    <SvgChainweb />
   </div>
 </template>
