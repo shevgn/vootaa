@@ -33,8 +33,14 @@ const updateUnderline = async (): Promise<void> => {
     return;
   }
 
-  while (underlineStylesProps.value.left > rect.left - nav.left) {
-    underlineStylesProps.value.left -= 2;
+  while (
+    underlineStylesProps.value.left > rect.left - nav.left ||
+    underlineStylesProps.value.width < rect.width ||
+    underlineStylesProps.value.width > rect.width
+  ) {
+    if (underlineStylesProps.value.left > rect.left - nav.left) {
+      underlineStylesProps.value.left -= 2;
+    }
     if (underlineStylesProps.value.width > rect.width) {
       underlineStylesProps.value.width -= 1;
       if (Math.abs(underlineStylesProps.value.width - rect.width) < 1) {
@@ -48,8 +54,14 @@ const updateUnderline = async (): Promise<void> => {
     }
     await new Promise((resolve) => setTimeout(resolve, 2));
   }
-  while (underlineStylesProps.value.left < rect.left - nav.left) {
-    underlineStylesProps.value.left += 2;
+  while (
+    underlineStylesProps.value.left < rect.left - nav.left ||
+    underlineStylesProps.value.width < rect.width ||
+    underlineStylesProps.value.width > rect.width
+  ) {
+    if (underlineStylesProps.value.left < rect.left - nav.left) {
+      underlineStylesProps.value.left += 2;
+    }
     if (underlineStylesProps.value.width > rect.width) {
       underlineStylesProps.value.width -= 1;
       if (Math.abs(underlineStylesProps.value.width - rect.width) < 1) {
