@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
-    "@formkit/auto-animate/nuxt",
+    "@nuxt/eslint",
   ],
   alias: {
     "#tailwind-config": resolve("./tailwind.config"),
