@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <svg width="1194" height="1254" viewBox="0 0 1194 1254" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 1194 1254" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="links">
       <path d="M629.5 816.5L406.5 508.5" stroke-width="2" stroke-linecap="square" />
       <path d="M767.5 626.5L406.5 508.5" stroke-width="2" stroke-linecap="square" />

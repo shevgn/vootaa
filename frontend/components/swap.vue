@@ -119,7 +119,7 @@ const showTransactionHint = (): void => {
               v-for="amount in amountForSwap"
               :key="amount"
               @click="saveAmount(amount)"
-              class="border hover:border-opacity-100 dark:border-opacity-0 border-opacity-0 items-center justify-center dark:border-custom-cyan border-custom-dark rounded-md p-1 flex"
+              class="border hover:border-opacity-100 dark:border-opacity-0 border-opacity-0 items-center justify-center dark:border-custom-cyan border-custom-dark rounded-md p-2 flex"
               :class="selectedAmount === amount ? 'dark:border-opacity-100 border-opacity-100' : ''"
             >
               <span>
