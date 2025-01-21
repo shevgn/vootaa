@@ -33,7 +33,9 @@ const showTransactionHint = (): void => {
 </script>
 
 <template>
-  <div class="w-full relative h-full px-8 text-custom-dark dark:text-custom-cyan">
+  <div
+    class="w-full relative h-full px-8 text-custom-dark dark:text-custom-cyan"
+  >
     <h2 class="sr-only">Swap block</h2>
     <div
       class="border dark:border-custom-cyan border-custom-dark h-12 w-full flex rounded-md justify-between items-center px-4 mb-4"
@@ -93,7 +95,10 @@ const showTransactionHint = (): void => {
               @click="showMinHint"
               class="absolute top-1 -left-1 rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan bg-custom-dark"
             >
-              <UIcon name="ic:baseline-question-mark" class="w-3 h-3 dark:bg-custom-dark text-custom-cyan" />
+              <UIcon
+                name="ic:baseline-question-mark"
+                class="w-3 h-3 dark:bg-custom-dark text-custom-cyan"
+              />
             </button>
             <p
               v-if="minHintShown"
@@ -106,11 +111,14 @@ const showTransactionHint = (): void => {
               @click="showMaxHint"
               class="absolute top-1 -right-1 rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan bg-custom-dark"
             >
-              <UIcon name="ic:baseline-question-mark" class="w-3 h-3 dark:bg-custom-dark text-custom-cyan" />
+              <UIcon
+                name="ic:baseline-question-mark"
+                class="w-3 h-3 dark:bg-custom-dark text-custom-cyan"
+              />
             </button>
             <p
               v-if="maxHintShown"
-              class="absolute text-red-500 -top-2 right-6 text-xs "
+              class="absolute text-red-500 -top-2 right-6 text-xs"
             >
               Limit to 1% of pool size
             </p>
@@ -119,8 +127,12 @@ const showTransactionHint = (): void => {
               v-for="amount in amountForSwap"
               :key="amount"
               @click="saveAmount(amount)"
-              class="border hover:border-opacity-100 dark:border-opacity-0 border-opacity-0 items-center justify-center dark:border-custom-cyan border-custom-dark rounded-md p-2 flex"
-              :class="selectedAmount === amount ? 'dark:border-opacity-100 border-opacity-100' : ''"
+              class="border hover:border-opacity-100 dark:hover:border-opacity-100 dark:border-opacity-0 border-opacity-0 items-center justify-center dark:border-custom-cyan border-custom-dark rounded-md p-2 flex"
+              :class="
+                selectedAmount === amount
+                  ? 'dark:border-opacity-100 border-opacity-100'
+                  : ''
+              "
             >
               <span>
                 {{ amount.toFixed(1) }}
@@ -135,12 +147,14 @@ const showTransactionHint = (): void => {
               v-for="percentage in percentageForSwap"
               :key="percentage"
               @click="saveAmount(percentage)"
-              class="flex dark:border-opacity-0 border-opacity-0 justify-center items-center p-1 border hover:border-opacity-100  dark:border-custom-cyan border-custom-dark rounded-md "
-              :class="selectedAmount === percentage ? 'dark:border-opacity-100 border-opacity-100' : ''"
+              class="flex dark:border-opacity-0 dark:hover:border-opacity-100 border-opacity-0 justify-center items-center p-1 border hover:border-opacity-100 dark:border-custom-cyan border-custom-dark rounded-md"
+              :class="
+                selectedAmount === percentage
+                  ? 'dark:border-opacity-100 border-opacity-100'
+                  : ''
+              "
             >
-              <span>
-                {{ percentage * 100 }}%
-              </span>
+              <span> {{ percentage * 100 }}% </span>
             </button>
           </div>
           <div
@@ -201,9 +215,12 @@ const showTransactionHint = (): void => {
       <button
         type="button"
         @click="showTransactionHint"
-        class="rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan  bg-custom-dark"
+        class="rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan bg-custom-dark"
       >
-        <UIcon name="ic:baseline-question-mark" class="w-3 h-3 dark:bg-custom-dark text-custom-cyan" />
+        <UIcon
+          name="ic:baseline-question-mark"
+          class="w-3 h-3 dark:bg-custom-dark text-custom-cyan"
+        />
       </button>
     </div>
   </div>
