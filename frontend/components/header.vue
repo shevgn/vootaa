@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const mounted = ref(false);
+
 const route = useRoute();
 
 const path = computed(() => {
@@ -85,7 +87,9 @@ watch(
 );
 
 onMounted(() => {
-  updateUnderline();
+  setTimeout(() => {
+    mounted.value = true;
+  }, 100);
   console.log("mounted");
 });
 </script>
@@ -135,7 +139,7 @@ onMounted(() => {
             <NuxtLink to="/liquidity" class=""> Liquidity </NuxtLink>
           </li>
         </ul>
-        <div :style="underlineStyles" class="bottom-0 absolute bg-custom-cyan h-0.5"></div>
+        <div :style="underlineStyles" class="bottom-0 absolute dark:bg-custom-cyan bg-custom-dark h-0.5"></div>
       </nav>
       <div class="flex items-center space-x-4">
         <form action="">
@@ -146,7 +150,8 @@ onMounted(() => {
           class="border dark:hover:bg-custom-dark hover:bg-gray-100 border-custom-dark dark:border-custom-cyan rounded-lg p-1 px-2">
           <span class="text-custom-dark dark:text-custom-cyan">Connect to wallet</span>
         </button>
-        <ClientOnly>
+        <USkeleton v-if="!mounted" class="w-6 h-6 rounded-full" />
+        <ClientOnly v-else>
           <ColorModeSwitch />
         </ClientOnly>
       </div>
