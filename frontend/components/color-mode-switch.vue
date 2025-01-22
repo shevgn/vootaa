@@ -7,7 +7,7 @@ const toggleColorMode = () => {
 </script>
 
 <template>
-  <button @click="toggleColorMode" class="group flex items-center">
+  <button class="group flex items-center" @click="toggleColorMode">
     <svg
       v-if="colorMode.value == 'dark'"
       xmlns="http://www.w3.org/2000/svg"

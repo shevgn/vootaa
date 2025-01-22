@@ -7,15 +7,15 @@ const percentageForSwap: number[] = [
   0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
 ];
 
-let selectedAmount = ref(0);
+const selectedAmount = ref(0);
 
 const saveAmount = (amount: number): void => {
   selectedAmount.value = amount;
   console.log(amount);
 };
 
-let minHintShown = ref(false);
-let maxHintShown = ref(false);
+const minHintShown = ref(false);
+const maxHintShown = ref(false);
 
 const showMinHint = (): void => {
   minHintShown.value = !minHintShown.value;
@@ -25,7 +25,7 @@ const showMaxHint = (): void => {
   maxHintShown.value = !maxHintShown.value;
 };
 
-let transactionHintShown = ref(false);
+const transactionHintShown = ref(false);
 
 const showTransactionHint = (): void => {
   transactionHintShown.value = !transactionHintShown.value;
@@ -72,18 +72,18 @@ const showTransactionHint = (): void => {
         </div>
         <div class="flex flex-col justify-center text-center">
           <span>3,245.58</span>
-          <hr />
+          <hr >
           <span>162,513.96</span>
         </div>
         <span>$VOOTAA</span>
         <div class="flex flex-col justify-center text-center">
           <span>3,245.58</span>
-          <hr />
+          <hr >
           <span>162,513.96</span>
         </div>
         <span>$VOOTAA</span>
       </div>
-      <hr class="w-full" />
+      <hr class="w-full" >
       <div class="h-full w-full p-2">
         <p class="mb-2">Choose your amount:</p>
         <div class="grid h-fit grid-cols-2 grid-rows-3 p-2">
@@ -92,8 +92,8 @@ const showTransactionHint = (): void => {
           >
             <button
               type="button"
-              @click="showMinHint"
               class="absolute -left-1 top-1 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
+              @click="showMinHint"
             >
               <UIcon
                 name="ic:baseline-question-mark"
@@ -108,8 +108,8 @@ const showTransactionHint = (): void => {
             </p>
             <button
               type="button"
-              @click="showMaxHint"
               class="absolute -right-1 top-1 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
+              @click="showMaxHint"
             >
               <UIcon
                 name="ic:baseline-question-mark"
@@ -123,16 +123,16 @@ const showTransactionHint = (): void => {
               Limit to 1% of pool size
             </p>
             <button
-              type="button"
               v-for="amount in amountForSwap"
               :key="amount"
-              @click="saveAmount(amount)"
+              type="button"
               class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-2 hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === amount
                   ? 'border-opacity-100 dark:border-opacity-100'
                   : ''
               "
+              @click="saveAmount(amount)"
             >
               <span>
                 {{ amount.toFixed(1) }}
@@ -143,16 +143,16 @@ const showTransactionHint = (): void => {
             class="col-span-1 row-span-2 grid grid-cols-5 grid-rows-3 gap-2 border-r border-custom-dark pr-4 dark:border-custom-cyan"
           >
             <button
-              type="button"
               v-for="percentage in percentageForSwap"
               :key="percentage"
-              @click="saveAmount(percentage)"
+              type="button"
               class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === percentage
                   ? 'border-opacity-100 dark:border-opacity-100'
                   : ''
               "
+              @click="saveAmount(percentage)"
             >
               <span> {{ percentage * 100 }}% </span>
             </button>
@@ -207,15 +207,15 @@ const showTransactionHint = (): void => {
         class="text-right text-xs font-medium text-custom-cyan"
       >
         The default transaction expiration time is 10 minutes,
-        <br />
+        <br >
         the default transaction time is 20 minutes,
-        <br />
+        <br >
         and the default price slippage is 0.75%.
       </p>
       <button
         type="button"
-        @click="showTransactionHint"
         class="flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
+        @click="showTransactionHint"
       >
         <UIcon
           name="ic:baseline-question-mark"
