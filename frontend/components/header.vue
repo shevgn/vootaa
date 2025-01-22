@@ -45,12 +45,12 @@ const updateUnderline = async (): Promise<void> => {
     }
     if (underlineStylesProps.value.width > rect.width) {
       underlineStylesProps.value.width -= 1;
-      if (Math.abs(underlineStylesProps.value.width - rect.width) < 1) {
+      if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
       }
-    } else {
+    } else if (underlineStylesProps.value.width < rect.width) {
       underlineStylesProps.value.width += 1;
-      if (Math.abs(underlineStylesProps.value.width - rect.width) < 1) {
+      if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
       }
     }
@@ -66,12 +66,12 @@ const updateUnderline = async (): Promise<void> => {
     }
     if (underlineStylesProps.value.width > rect.width) {
       underlineStylesProps.value.width -= 1;
-      if (Math.abs(underlineStylesProps.value.width - rect.width) < 1) {
+      if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
       }
-    } else {
+    } else if (underlineStylesProps.value.width < rect.width) {
       underlineStylesProps.value.width += 1;
-      if (Math.abs(underlineStylesProps.value.width - rect.width) < 1) {
+      if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
       }
     }
