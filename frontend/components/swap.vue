@@ -34,16 +34,16 @@ const showTransactionHint = (): void => {
 
 <template>
   <div
-    class="w-full relative h-full px-8 text-custom-dark dark:text-custom-cyan"
+    class="relative h-full w-full px-8 text-custom-dark dark:text-custom-cyan"
   >
     <h2 class="sr-only">Swap block</h2>
     <div
-      class="border dark:border-custom-cyan border-custom-dark h-12 w-full flex rounded-md justify-between items-center px-4 mb-4"
+      class="mb-4 flex h-12 w-full items-center justify-between rounded-md border border-custom-dark px-4 dark:border-custom-cyan"
     >
       <h3 class="sr-only">Choose currency</h3>
       <span>Swap your</span>
       <span
-        class="dark:bg-custom-cyan bg-custom-dark h-full flex items-center px-2 justify-between w-1/3 font-medium text-white dark:text-custom-dark"
+        class="flex h-full w-1/3 items-center justify-between bg-custom-dark px-2 font-medium text-white dark:bg-custom-cyan dark:text-custom-dark"
       >
         <span> $VOOTAA </span>
         to
@@ -56,27 +56,27 @@ const showTransactionHint = (): void => {
       </span>
       <button
         type="button"
-        class="flex items-center border dark:border-custom-cyan border-custom-dark rounded-md px-4"
+        class="flex items-center rounded-md border border-custom-dark px-4 dark:border-custom-cyan"
       >
-        <UIcon name="ic:baseline-swap-horiz" class="w-8 h-8" />
+        <UIcon name="ic:baseline-swap-horiz" class="h-8 w-8" />
       </button>
     </div>
     <div
-      class="border dark:border-custom-cyan border-custom-dark h-full w-full flex flex-col rounded-md text-custom-dark dark:text-custom-cyan p-1 items-center mb-4"
+      class="mb-4 flex h-full w-full flex-col items-center rounded-md border border-custom-dark p-1 text-custom-dark dark:border-custom-cyan dark:text-custom-cyan"
     >
       <h3 class="sr-only">Swap info</h3>
-      <div class="flex items-center justify-evenly w-full p-2">
-        <div class="flex items-center px-2 justify-between flex-col">
+      <div class="flex w-full items-center justify-evenly p-2">
+        <div class="flex flex-col items-center justify-between px-2">
           <span>Your balance:</span>
           <span>Pool liquidity:</span>
         </div>
-        <div class="flex justify-center flex-col text-center">
+        <div class="flex flex-col justify-center text-center">
           <span>3,245.58</span>
           <hr />
           <span>162,513.96</span>
         </div>
         <span>$VOOTAA</span>
-        <div class="flex justify-center flex-col text-center">
+        <div class="flex flex-col justify-center text-center">
           <span>3,245.58</span>
           <hr />
           <span>162,513.96</span>
@@ -84,41 +84,41 @@ const showTransactionHint = (): void => {
         <span>$VOOTAA</span>
       </div>
       <hr class="w-full" />
-      <div class="w-full h-full p-2">
+      <div class="h-full w-full p-2">
         <p class="mb-2">Choose your amount:</p>
-        <div class="grid grid-cols-2 grid-rows-3 h-fit p-2">
+        <div class="grid h-fit grid-cols-2 grid-rows-3 p-2">
           <div
-            class="relative row-span-1 col-span-2 flex justify-evenly items-center w-full border-b darkL:border-custom-cyan border-custom-dark mb-4 p-4 pb-1"
+            class="darkL:border-custom-cyan relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1"
           >
             <button
               type="button"
               @click="showMinHint"
-              class="absolute top-1 -left-1 rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan bg-custom-dark"
+              class="absolute -left-1 top-1 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
             >
               <UIcon
                 name="ic:baseline-question-mark"
-                class="w-3 h-3 dark:bg-custom-dark text-custom-cyan"
+                class="h-3 w-3 text-custom-cyan dark:bg-custom-dark"
               />
             </button>
             <p
               v-if="minHintShown"
-              class="absolute text-red-500 -top-2 left-6 text-xs"
+              class="absolute -top-2 left-6 text-xs text-red-500"
             >
               Limit the minimum amout to {{ amountForSwap[0] }}
             </p>
             <button
               type="button"
               @click="showMaxHint"
-              class="absolute top-1 -right-1 rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan bg-custom-dark"
+              class="absolute -right-1 top-1 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
             >
               <UIcon
                 name="ic:baseline-question-mark"
-                class="w-3 h-3 dark:bg-custom-dark text-custom-cyan"
+                class="h-3 w-3 text-custom-cyan dark:bg-custom-dark"
               />
             </button>
             <p
               v-if="maxHintShown"
-              class="absolute text-red-500 -top-2 right-6 text-xs"
+              class="absolute -top-2 right-6 text-xs text-red-500"
             >
               Limit to 1% of pool size
             </p>
@@ -127,10 +127,10 @@ const showTransactionHint = (): void => {
               v-for="amount in amountForSwap"
               :key="amount"
               @click="saveAmount(amount)"
-              class="border hover:border-opacity-100 dark:hover:border-opacity-100 dark:border-opacity-0 border-opacity-0 items-center justify-center dark:border-custom-cyan border-custom-dark rounded-md p-2 flex"
+              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-2 hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === amount
-                  ? 'dark:border-opacity-100 border-opacity-100'
+                  ? 'border-opacity-100 dark:border-opacity-100'
                   : ''
               "
             >
@@ -140,17 +140,17 @@ const showTransactionHint = (): void => {
             </button>
           </div>
           <div
-            class="col-span-1 row-span-2 grid grid-cols-5 gap-2 grid-rows-3 border-r dark:border-custom-cyan border-custom-dark pr-4"
+            class="col-span-1 row-span-2 grid grid-cols-5 grid-rows-3 gap-2 border-r border-custom-dark pr-4 dark:border-custom-cyan"
           >
             <button
               type="button"
               v-for="percentage in percentageForSwap"
               :key="percentage"
               @click="saveAmount(percentage)"
-              class="flex dark:border-opacity-0 dark:hover:border-opacity-100 border-opacity-0 justify-center items-center p-1 border hover:border-opacity-100 dark:border-custom-cyan border-custom-dark rounded-md"
+              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === percentage
-                  ? 'dark:border-opacity-100 border-opacity-100'
+                  ? 'border-opacity-100 dark:border-opacity-100'
                   : ''
               "
             >
@@ -158,9 +158,9 @@ const showTransactionHint = (): void => {
             </button>
           </div>
           <div
-            class="relative flex flex-col pl-4 text-sm items-end col-span-1 row-span-2 justify-evenly"
+            class="relative col-span-1 row-span-2 flex flex-col items-end justify-evenly pl-4 text-sm"
           >
-            <span class="absolute top-0 left-4 text-xs">Estimate:</span>
+            <span class="absolute left-4 top-0 text-xs">Estimate:</span>
             <p>
               Price Effect:
               <span>-0.52%</span>
@@ -177,7 +177,7 @@ const showTransactionHint = (): void => {
             </p>
           </div>
         </div>
-        <div class="px-6 py-2 flex items-center w-full justify-evenly">
+        <div class="flex w-full items-center justify-evenly px-6 py-2">
           <div>
             <span class="text-3xl">649.</span>
             <span class="pr-4">0543</span>
@@ -185,7 +185,7 @@ const showTransactionHint = (): void => {
           </div>
           <UIcon
             name="ic:baseline-keyboard-double-arrow-right"
-            class="w-8 h-8 dark:bg-custom-cyan bg-custom-dark"
+            class="h-8 w-8 bg-custom-dark dark:bg-custom-cyan"
           />
           <div>
             <span class="text-3xl">5055.</span>
@@ -197,14 +197,14 @@ const showTransactionHint = (): void => {
     </div>
     <button
       type="button"
-      class="dark:bg-custom-cyan h-full flex items-center p-4 justify-center rounded-md w-full bg-transparent border border-custom-dark dark:border-none"
+      class="flex h-full w-full items-center justify-center rounded-md border border-custom-dark bg-transparent p-4 dark:border-none dark:bg-custom-cyan"
     >
-      <span class="text-4xl dark:text-custom-dark font-semibold">SWAP</span>
+      <span class="text-4xl font-semibold dark:text-custom-dark">SWAP</span>
     </button>
-    <div class="flex flex-row justify-end space-x-4 mt-4 h-full w-full">
+    <div class="mt-4 flex h-full w-full flex-row justify-end space-x-4">
       <p
         v-if="transactionHintShown"
-        class="text-xs text-right text-custom-cyan font-medium"
+        class="text-right text-xs font-medium text-custom-cyan"
       >
         The default transaction expiration time is 10 minutes,
         <br />
@@ -215,11 +215,11 @@ const showTransactionHint = (): void => {
       <button
         type="button"
         @click="showTransactionHint"
-        class="rounded-full size-5 flex items-center justify-center dark:bg-custom-cyan bg-custom-dark"
+        class="flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
       >
         <UIcon
           name="ic:baseline-question-mark"
-          class="w-3 h-3 dark:bg-custom-dark text-custom-cyan"
+          class="h-3 w-3 text-custom-cyan dark:bg-custom-dark"
         />
       </button>
     </div>
@@ -228,6 +228,6 @@ const showTransactionHint = (): void => {
 
 <style scoped>
 hr {
-  @apply dark:border-custom-cyan border-custom-dark;
+  @apply border-custom-dark dark:border-custom-cyan;
 }
 </style>
