@@ -152,10 +152,6 @@ onMounted(() => {
         <ul
           class="flex flex-row space-x-8 text-custom-dark dark:text-custom-cyan"
         >
-          <!--<li v-auto-animate class="relative">
-<NuxtLink to="/swap" class=""> Swap</NuxtLink>
-<div v-if="path === '/swap'" class="bottom-0 absolute bg-custom-cyan w-full h-0.5"></div>
-</li>-->
           <li>
             <NuxtLink to="/swap" class="">Swap</NuxtLink>
           </li>
@@ -175,7 +171,7 @@ onMounted(() => {
         <form action="">
           <input
             type="text"
-            placeholder="wallet number"
+            placeholder="Input your K:account"
             class="rounded-lg bg-custom-gray px-4 py-1 text-custom-dark placeholder:text-custom-dark focus-visible:outline-custom-green dark:bg-custom-dark dark:text-custom-cyan dark:placeholder:text-custom-cyan dark:focus-visible:outline-custom-green"
           >
         </form>

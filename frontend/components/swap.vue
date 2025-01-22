@@ -77,18 +77,18 @@ const showTransactionHint = (): void => {
         </div>
         <span>$VOOTAA</span>
         <div class="flex flex-col justify-center text-center">
-          <span>3,245.58</span>
+          <span>56,799.17</span>
           <hr >
-          <span>162,513.96</span>
+          <span>1,310,190.22</span>
         </div>
-        <span>$VOOTAA</span>
+        <span>$KDS</span>
       </div>
       <hr class="w-full" >
       <div class="h-full w-full p-2">
         <p class="mb-2">Choose your amount:</p>
         <div class="grid h-fit grid-cols-2 grid-rows-3 p-2">
           <div
-            class="darkL:border-custom-cyan relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1"
+            class="dark:border-custom-cyan relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1"
           >
             <button
               type="button"
