@@ -8,6 +8,7 @@
         "dev": "nuxt dev",
         "generate": "nuxt generate",
         "preview": "nuxt preview",
+        "test": "vitest",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "prettier": "prettier . --check",
@@ -15,7 +16,6 @@
         "postinstall": "nuxt prepare"
     },
     "dependencies": {
-        "@formkit/auto-animate": "^0.8.2",
         "@nuxtjs/color-mode": "3.5.2",
         "nuxt": "^3.15.2",
         "vue": "latest",
@@ -24,11 +24,16 @@
     "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a",
     "devDependencies": {
         "@nuxt/eslint": "^0.7.5",
+        "@nuxt/test-utils": "^3.15.4",
         "@nuxt/ui": "2.20.0",
         "@nuxtjs/tailwindcss": "6.12.2",
+        "@vue/test-utils": "^2.4.6",
         "eslint": "^9.18.0",
+        "happy-dom": "^16.7.2",
+        "playwright-core": "^1.49.1",
         "prettier": "^3.4.2",
         "prettier-plugin-tailwindcss": "^0.6.10",
-        "typescript": "^5.7.3"
+        "typescript": "^5.7.3",
+        "vitest": "^3.0.3"
     }
 }

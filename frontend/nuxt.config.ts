@@ -10,6 +10,7 @@ export default defineNuxtConfig({
         "@nuxtjs/tailwindcss",
         "@nuxtjs/color-mode",
         "@nuxt/eslint",
+        '@nuxt/test-utils/module',
     ],
     alias: {
         "#tailwind-config": resolve("./tailwind.config"),
