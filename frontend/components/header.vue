@@ -97,6 +97,9 @@ onMounted(() => {
 
 <template>
   <header class="flex flex-row items-center">
+    <h1 class="sr-only text-lg text-custom-dark dark:text-custom-cyan">
+      Vootaa
+    </h1>
     <svg
       class="mr-1 h-12 w-12"
       viewBox="0 0 500 500"
@@ -146,20 +149,22 @@ onMounted(() => {
         </g>
       </g>
     </svg>
-    <h1 class="text-lg text-custom-dark dark:text-custom-cyan">Vootaa</h1>
-    <div class="ml-10 flex w-full justify-between">
+    <div class="flex w-full justify-between">
       <nav class="relative flex items-center">
         <ul
-          class="flex flex-row space-x-8 text-custom-dark dark:text-custom-cyan"
+          class="flex flex-row items-center space-x-8 text-custom-dark dark:text-custom-cyan"
         >
           <li>
-            <NuxtLink to="/swap" class="">Swap</NuxtLink>
+            <NuxtLink to="/" class="mr-4 text-xl">Vootaa</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/pool" class="">Pool</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/liquidity" class=""> Liquidity </NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/swap" class="">Swap</NuxtLink>
           </li>
         </ul>
         <div
@@ -168,12 +173,12 @@ onMounted(() => {
         />
       </nav>
       <div class="flex items-center space-x-4">
-        <form action="">
+        <form action="" class="h-full">
           <input
             type="text"
-            placeholder="Input your K:account"
-            class="rounded-lg bg-custom-gray px-4 py-1 text-custom-dark placeholder:text-custom-dark focus-visible:outline-custom-green dark:bg-custom-dark dark:text-custom-cyan dark:placeholder:text-custom-cyan dark:focus-visible:outline-custom-green"
-          >
+            placeholder="input your K:account"
+            class="h-full w-64 rounded-lg bg-custom-gray px-4 py-1 text-custom-dark placeholder:text-custom-dark placeholder-shown:text-sm focus-visible:outline-custom-green dark:bg-custom-dark dark:text-custom-cyan dark:placeholder:text-custom-cyan dark:focus-visible:outline-custom-green"
+          />
         </form>
         <button
           class="rounded-lg border border-custom-dark p-1 px-2 hover:bg-gray-100 dark:border-custom-cyan dark:hover:bg-custom-dark"
