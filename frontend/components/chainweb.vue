@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="relative h-full w-full max-w-screen-sm rounded-md border border-custom-dark p-4 dark:border-custom-cyan"
+    class="relative hidden h-full w-full max-w-screen-sm rounded-md border border-custom-dark p-4 dark:border-custom-cyan lg:block"
   >
     <div
       class="absolute left-4 right-4 top-4 mb-4 flex flex-row justify-between text-lg font-semibold"
