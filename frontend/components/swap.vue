@@ -30,6 +30,30 @@ const transactionHintShown = ref(false);
 const showTransactionHint = (): void => {
   transactionHintShown.value = !transactionHintShown.value;
 };
+
+const chainsApi = [
+  {
+    id: 1,
+  },
+  {
+    id: 2,
+  },
+  {
+    id: 3,
+  },
+  {
+    id: 4,
+  },
+  {
+    id: 5,
+  },
+];
+
+const chains = chainsApi.map((chain) => {
+  return `${chain.id}`;
+});
+
+const selectedChain = ref(chains[0]);
 </script>
 
 <template>
@@ -43,17 +67,22 @@ const showTransactionHint = (): void => {
       <h3 class="sr-only">Choose currency</h3>
       <span>Swap your</span>
       <span
-        class="flex h-full w-1/3 items-center justify-between bg-custom-dark px-2 font-medium text-white dark:bg-custom-cyan dark:text-custom-dark"
+        class="flex h-full w-1/3 items-center justify-between bg-custom-dark px-2 font-semibold text-white dark:bg-custom-cyan dark:text-custom-dark"
       >
         <span> $VOOTAA </span>
         to
         <span> $KDS </span>
       </span>
 
-      <span>
-        on Chain
-        <span class="text-red-400"> #8 </span>
-      </span>
+      <section class="flex items-center space-x-2">
+        <span>on Chain</span>
+        <span class="hidden text-red-400 lg:inline"> #8 </span>
+        <USelectMenu
+          v-model="selectedChain"
+          :options="chains"
+          class="lg:hidden"
+        />
+      </section>
       <button
         type="button"
         class="flex items-center rounded-md border border-custom-dark px-4 dark:border-custom-cyan"
@@ -65,7 +94,7 @@ const showTransactionHint = (): void => {
       class="mb-4 flex h-full w-full flex-col items-center rounded-md border border-custom-dark p-1 text-custom-dark dark:border-custom-cyan dark:text-custom-cyan"
     >
       <h3 class="sr-only">Swap info</h3>
-      <div class="flex w-full items-center justify-evenly p-2">
+      <div class="flex w-full items-center justify-evenly py-2">
         <div class="flex flex-col items-center justify-between px-2">
           <span>Your balance:</span>
           <span>Pool liquidity:</span>
@@ -86,13 +115,13 @@ const showTransactionHint = (): void => {
       <hr class="w-full" />
       <div class="h-full w-full p-2">
         <p class="mb-2">Choose your amount:</p>
-        <div class="grid h-fit grid-cols-2 grid-rows-3 p-2">
+        <div class="grid h-fit grid-cols-2 grid-rows-3">
           <div
             class="relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1 dark:border-custom-cyan"
           >
             <button
               type="button"
-              class="absolute -left-1 top-1 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
+              class="absolute left-1 top-0 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
               @click="showMinHint"
             >
               <UIcon
@@ -102,13 +131,13 @@ const showTransactionHint = (): void => {
             </button>
             <p
               v-if="minHintShown"
-              class="absolute -top-2 left-6 text-xs text-red-500"
+              class="absolute -top-1 left-8 text-xs font-medium text-red-500"
             >
               Limit the minimum amout to {{ amountForSwap[0] }}
             </p>
             <button
               type="button"
-              class="absolute -right-1 top-1 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
+              class="absolute right-1 top-0 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
               @click="showMaxHint"
             >
               <UIcon
@@ -118,7 +147,7 @@ const showTransactionHint = (): void => {
             </button>
             <p
               v-if="maxHintShown"
-              class="absolute -top-2 right-6 text-xs text-red-500"
+              class="absolute -top-1 right-8 text-xs font-medium text-red-500"
             >
               Limit to 1% of pool size
             </p>
@@ -126,7 +155,7 @@ const showTransactionHint = (): void => {
               v-for="amount in amountForSwap"
               :key="amount"
               type="button"
-              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-2 text-sm hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
+              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 py-2 text-sm hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === amount
                   ? 'border-opacity-100 dark:border-opacity-100'
@@ -140,7 +169,7 @@ const showTransactionHint = (): void => {
             </button>
           </div>
           <div
-            class="col-span-1 row-span-2 grid grid-cols-5 grid-rows-3 gap-2 border-r border-custom-dark pr-4 dark:border-custom-cyan"
+            class="col-span-1 row-span-2 grid grid-cols-5 grid-rows-3 gap-0 border-r border-custom-dark pr-4 dark:border-custom-cyan"
           >
             <button
               v-for="percentage in percentageForSwap"
@@ -158,7 +187,7 @@ const showTransactionHint = (): void => {
             </button>
           </div>
           <div
-            class="relative col-span-1 row-span-2 flex flex-col items-end justify-evenly pl-4 text-sm"
+            class="relative col-span-1 row-span-2 flex flex-col justify-evenly pl-4 text-end text-sm"
           >
             <span class="absolute left-4 top-0 text-xs">Estimate:</span>
             <p>
