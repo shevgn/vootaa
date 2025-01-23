@@ -7,7 +7,6 @@ type AccordionItem = {
     last7Days: number;
     max: string;
   };
-  content: string;
 };
 
 const sections: Ref<AccordionItem[], AccordionItem[]> = ref([
@@ -18,7 +17,6 @@ const sections: Ref<AccordionItem[], AccordionItem[]> = ref([
       last7Days: 1.12,
       max: "66@C19",
     },
-    content: "Content for section 1",
   },
   {
     title: {
@@ -27,7 +25,6 @@ const sections: Ref<AccordionItem[], AccordionItem[]> = ref([
       last7Days: 153,
       max: "10@C18",
     },
-    content: "Content for section 1",
   },
   {
     title: {
@@ -36,7 +33,6 @@ const sections: Ref<AccordionItem[], AccordionItem[]> = ref([
       last7Days: 288,
       max: "21@C16",
     },
-    content: "Content for section 3",
   },
   {
     title: {
@@ -45,7 +41,6 @@ const sections: Ref<AccordionItem[], AccordionItem[]> = ref([
       last7Days: 357,
       max: "19@C7",
     },
-    content: "Content for section 4",
   },
   {
     title: {
@@ -54,7 +49,6 @@ const sections: Ref<AccordionItem[], AccordionItem[]> = ref([
       last7Days: 463,
       max: "25@C0",
     },
-    content: "Content for section 5",
   },
 ]);
 
@@ -94,7 +88,6 @@ const options = {
     floating: false,
   },
   annotations: {},
-
   legend: {
     labels: {
       colors: "#68FCF1",
@@ -128,29 +121,12 @@ const options = {
     },
   },
 };
-
-function generateDayWiseTimeSeries(
-  baseval: number,
-  count: number,
-  yrange: { min: number; max: number }
-) {
-  let i = 0;
-  let series = [];
-  while (i < count) {
-    let x = baseval;
-    let y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-
-    series.push([x, y]);
-    baseval += 86400000;
-    i++;
-  }
-  return series;
-}
 </script>
 
 <template>
-  <div class="w-full text-custom-dark dark:text-custom-cyan lg:px-20">
+  <div
+    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-10"
+  >
     <div
       v-for="(section, index) in sections"
       :key="index"
@@ -187,8 +163,4 @@ function generateDayWiseTimeSeries(
   </div>
 </template>
 
-<style>
-.vue-apexcharts text {
-  @apply fill-custom-cyan;
-}
-</style>
+<style></style>
