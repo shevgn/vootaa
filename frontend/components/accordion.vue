@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import VueApexCharts from "vue3-apexcharts";
 type AccordionItem = {
   title: {
     pool: string;
@@ -62,6 +63,90 @@ const activeSection = ref<number | null>(null);
 const toggleSection = (index: number) => {
   activeSection.value = activeSection.value === index ? null : index;
 };
+
+const series = ref([
+  {
+    name: "KDS",
+    data: [31, 40, 28, 51, 42, 109, 100],
+  },
+  {
+    name: "VOOTAA",
+    data: [11, 32, 45, 32, 34, 52, 41],
+  },
+]);
+
+const options = {
+  chart: {
+    height: 350,
+    type: "area",
+    toolbar: {
+      tools: {
+        download: false,
+      },
+    },
+  },
+  title: {
+    text: "cyan",
+    align: "left",
+    margin: 10,
+    offsetX: 0,
+    offsetY: 0,
+    floating: false,
+  },
+  annotations: {},
+
+  legend: {
+    labels: {
+      colors: "#68FCF1",
+      useSeriesColors: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: "smooth",
+  },
+  xaxis: {
+    type: "datetime",
+    categories: [
+      "2018-09-19T00:00:00.000Z",
+      "2018-09-19T01:30:00.000Z",
+      "2018-09-19T02:30:00.000Z",
+      "2018-09-19T03:30:00.000Z",
+      "2018-09-19T04:30:00.000Z",
+      "2018-09-19T05:30:00.000Z",
+      "2018-09-19T06:30:00.000Z",
+    ],
+    tooltip: {
+      enabled: false,
+    },
+  },
+  tooltip: {
+    x: {
+      format: "dd/MM/yy HH:mm",
+    },
+  },
+};
+
+function generateDayWiseTimeSeries(
+  baseval: number,
+  count: number,
+  yrange: { min: number; max: number }
+) {
+  let i = 0;
+  let series = [];
+  while (i < count) {
+    let x = baseval;
+    let y =
+      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+
+    series.push([x, y]);
+    baseval += 86400000;
+    i++;
+  }
+  return series;
+}
 </script>
 
 <template>
@@ -88,16 +173,22 @@ const toggleSection = (index: number) => {
       </button>
       <div
         class="overflow-hidden transition-all duration-300"
-        :style="{ maxHeight: activeSection === index ? '200px' : '0' }"
+        :style="{ maxHeight: activeSection === index ? '350px' : '0' }"
       >
         <div
-          class="bg-gray-50 p-4 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
+          class="bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
         >
-          {{ section.content }}
+          <ClientOnly>
+            <VueApexCharts height="300" :options="options" :series="series" />
+          </ClientOnly>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.vue-apexcharts text {
+  @apply fill-custom-cyan;
+}
+</style>
