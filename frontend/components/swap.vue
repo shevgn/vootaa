@@ -72,23 +72,23 @@ const showTransactionHint = (): void => {
         </div>
         <div class="flex flex-col justify-center text-center">
           <span>3,245.58</span>
-          <hr >
+          <hr />
           <span>162,513.96</span>
         </div>
         <span>$VOOTAA</span>
         <div class="flex flex-col justify-center text-center">
           <span>56,799.17</span>
-          <hr >
+          <hr />
           <span>1,310,190.22</span>
         </div>
         <span>$KDS</span>
       </div>
-      <hr class="w-full" >
+      <hr class="w-full" />
       <div class="h-full w-full p-2">
         <p class="mb-2">Choose your amount:</p>
         <div class="grid h-fit grid-cols-2 grid-rows-3 p-2">
           <div
-            class="dark:border-custom-cyan relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1"
+            class="relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1 dark:border-custom-cyan"
           >
             <button
               type="button"
@@ -126,7 +126,7 @@ const showTransactionHint = (): void => {
               v-for="amount in amountForSwap"
               :key="amount"
               type="button"
-              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-2 hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
+              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-2 text-sm hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === amount
                   ? 'border-opacity-100 dark:border-opacity-100'
@@ -146,7 +146,7 @@ const showTransactionHint = (): void => {
               v-for="percentage in percentageForSwap"
               :key="percentage"
               type="button"
-              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
+              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 text-sm hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
               :class="
                 selectedAmount === percentage
                   ? 'border-opacity-100 dark:border-opacity-100'
@@ -207,9 +207,9 @@ const showTransactionHint = (): void => {
         class="text-right text-xs font-medium text-custom-cyan"
       >
         The default transaction expiration time is 10 minutes,
-        <br >
+        <br />
         the default transaction time is 20 minutes,
-        <br >
+        <br />
         and the default price slippage is 0.75%.
       </p>
       <button
