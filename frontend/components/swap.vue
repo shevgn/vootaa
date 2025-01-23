@@ -34,11 +34,11 @@ const showTransactionHint = (): void => {
 
 <template>
   <div
-    class="relative h-full w-full px-8 text-custom-dark dark:text-custom-cyan"
+    class="relative mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
   >
     <h2 class="sr-only">Swap block</h2>
     <div
-      class="mb-4 flex h-12 w-full items-center justify-between rounded-md border border-custom-dark px-4 dark:border-custom-cyan"
+      class="mb-4 flex h-12 w-full items-center justify-around rounded-md border border-custom-dark dark:border-custom-cyan"
     >
       <h3 class="sr-only">Choose currency</h3>
       <span>Swap your</span>
