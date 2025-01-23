@@ -44,14 +44,16 @@ const updateUnderline = async (): Promise<void> => {
       underlineStylesProps.value.left -= 2;
     }
     if (underlineStylesProps.value.width > rect.width) {
-      underlineStylesProps.value.width -= 1;
       if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
+      } else {
+        underlineStylesProps.value.width -= 1;
       }
     } else if (underlineStylesProps.value.width < rect.width) {
-      underlineStylesProps.value.width += 1;
       if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
+      } else {
+        underlineStylesProps.value.width += 1;
       }
     }
     await new Promise((resolve) => setTimeout(resolve, 2));
@@ -65,14 +67,16 @@ const updateUnderline = async (): Promise<void> => {
       underlineStylesProps.value.left += 2;
     }
     if (underlineStylesProps.value.width > rect.width) {
-      underlineStylesProps.value.width -= 1;
       if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
+      } else {
+        underlineStylesProps.value.width -= 1;
       }
     } else if (underlineStylesProps.value.width < rect.width) {
-      underlineStylesProps.value.width += 1;
       if (Math.abs(underlineStylesProps.value.width - rect.width) <= 2) {
         underlineStylesProps.value.width = rect.width;
+      } else {
+        underlineStylesProps.value.width += 1;
       }
     }
     await new Promise((resolve) => setTimeout(resolve, 2));
@@ -183,7 +187,8 @@ onMounted(() => {
         <button
           class="rounded-lg border border-custom-dark p-1 px-2 hover:bg-gray-100 dark:border-custom-cyan dark:hover:bg-custom-dark"
         >
-          <span class="text-custom-dark dark:text-custom-cyan"
+          <span
+            class="text-sm text-custom-dark dark:text-custom-cyan lg:text-base"
             >Connect to wallet</span
           >
         </button>
