@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import VueApexCharts from "vue3-apexcharts";
+
 type AccordionItem = {
   title: {
     pool: string;
@@ -69,58 +70,64 @@ const series = ref([
   },
 ]);
 
-const options = {
-  chart: {
-    height: 350,
-    type: "area",
-    toolbar: {
-      tools: {
-        download: false,
+const options = computed(() => {
+  let isDark = useColorMode().value === "dark";
+  const textColor = isDark ? "#68FCF1" : "#333";
+
+  return {
+    chart: {
+      type: "area",
+      toolbar: {
+        tools: {
+          download: false,
+        },
+      },
+      foreColor: textColor,
+    },
+    noData: {
+      text: "Loading...",
+    },
+    title: {
+      text: "Price Overview",
+      align: "left",
+      margin: 10,
+      offsetX: 0,
+      offsetY: 0,
+    },
+    legend: {
+      labels: {
+        useSeriesColors: true,
       },
     },
-  },
-  title: {
-    text: "cyan",
-    align: "left",
-    margin: 10,
-    offsetX: 0,
-    offsetY: 0,
-    floating: false,
-  },
-  annotations: {},
-  legend: {
-    labels: {
-      colors: "#68FCF1",
-      useSeriesColors: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-  },
-  xaxis: {
-    type: "datetime",
-    categories: [
-      "2018-09-19T00:00:00.000Z",
-      "2018-09-19T01:30:00.000Z",
-      "2018-09-19T02:30:00.000Z",
-      "2018-09-19T03:30:00.000Z",
-      "2018-09-19T04:30:00.000Z",
-      "2018-09-19T05:30:00.000Z",
-      "2018-09-19T06:30:00.000Z",
-    ],
-    tooltip: {
+    dataLabels: {
       enabled: false,
     },
-  },
-  tooltip: {
-    x: {
-      format: "dd/MM/yy HH:mm",
+    stroke: {
+      curve: "smooth",
     },
-  },
-};
+    xaxis: {
+      type: "datetime",
+      categories: [
+        "2018-09-19T00:00:00.000Z",
+        "2018-09-19T01:30:00.000Z",
+        "2018-09-19T02:30:00.000Z",
+        "2018-09-19T03:30:00.000Z",
+        "2018-09-19T04:30:00.000Z",
+        "2018-09-19T05:30:00.000Z",
+        "2018-09-19T06:30:00.000Z",
+      ],
+      tooltip: {
+        enabled: false,
+      },
+    },
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+  };
+});
 </script>
 
 <template>
@@ -130,7 +137,7 @@ const options = {
     <div
       v-for="(section, index) in sections"
       :key="index"
-      class="mb-2 rounded-md border border-custom-cyan"
+      class="mb-2 rounded-md border border-custom-dark dark:border-custom-cyan"
     >
       <button
         class="flex w-full items-center justify-between bg-none p-4 text-left font-semibold focus:outline-none"
@@ -152,7 +159,7 @@ const options = {
         :style="{ maxHeight: activeSection === index ? '350px' : '0' }"
       >
         <div
-          class="bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
+          class="rounded bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
         >
           <ClientOnly>
             <VueApexCharts height="300" :options="options" :series="series" />
@@ -162,5 +169,3 @@ const options = {
     </div>
   </div>
 </template>
-
-<style></style>
