@@ -1,13 +1,14 @@
 <script setup lang="ts">
+const chainStore = useChainStore();
+
 const hoveredNode = ref<number | null>(null);
-const selectedNode = ref<number | null>(null);
 
 const handleNodeHover = (nodeId: number | null) => {
   hoveredNode.value = nodeId;
 };
 
 const handleNodeClick = (nodeId: number) => {
-  selectedNode.value = nodeId;
+  chainStore.setSelectedNode(nodeId);
 };
 </script>
 
@@ -22,7 +23,7 @@ const handleNodeClick = (nodeId: number) => {
       <span class="text-custom-dark dark:text-custom-cyan">
         CHAIN ID:
         <span class="text-red-400">
-          {{ selectedNode || "None" }}
+          {{ chainStore.selectedNode || "None" }}
         </span>
       </span>
     </div>

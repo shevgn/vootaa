@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const chainStore = useChainStore();
+
 const amountForSwap: number[] = [
   10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 1660.0,
 ];
@@ -52,8 +54,6 @@ const chainsApi = [
 const chains = chainsApi.map((chain) => {
   return `${chain.id}`;
 });
-
-const selectedChain = ref(chains[0]);
 </script>
 
 <template>
@@ -76,9 +76,12 @@ const selectedChain = ref(chains[0]);
 
       <section class="flex items-center space-x-2">
         <span>on Chain</span>
-        <span class="hidden text-red-400 lg:inline"> #8 </span>
+        <span class="hidden text-red-400 lg:inline"
+          >#{{ chainStore.selectedNode || "None" }}</span
+        >
         <USelectMenu
-          v-model="selectedChain"
+          v-if="chainStore.selectedNode"
+          v-model="chainStore.selectedNode"
           :options="chains"
           class="lg:hidden"
         />
