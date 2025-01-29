@@ -34,6 +34,14 @@ onMounted(() => {
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="links">
+      <UPopover mode="hover">
+        <!-- Елемент тут -->
+        <template #panel>
+          <div class="p-4">
+            <p>ASASAS</p>
+          </div>
+        </template>
+      </UPopover>
       <path
         d="M629.5 816.5L406.5 508.5"
         stroke-width="2"
