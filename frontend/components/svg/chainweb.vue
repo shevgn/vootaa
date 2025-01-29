@@ -1,4 +1,33 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps({
+  handleNodeHover: Function,
+  handleNodeClick: Function,
+});
+
+onMounted(() => {
+  const nodes = document.querySelectorAll("#nodes path");
+  const nodesGroup = document.querySelector("#nodes");
+
+  for (const node of nodes) {
+    nodesGroup?.replaceChild(node, node);
+  }
+
+  let nodeId = 0;
+  for (const node of nodes) {
+    node.id = nodeId.toString();
+    nodeId++;
+    node.addEventListener("mouseenter", () => {
+      if (props.handleNodeHover) props.handleNodeHover(node.id);
+    });
+    node.addEventListener("mouseleave", () => {
+      if (props.handleNodeHover) props.handleNodeHover(null);
+    });
+    node.addEventListener("click", () => {
+      if (props.handleNodeClick) props.handleNodeClick(node.id);
+    });
+  }
+});
+</script>
 
 <template>
   <svg
@@ -8,6 +37,14 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="links">
+      <UPopover mode="hover">
+        <!-- Елемент тут -->
+        <template #panel>
+          <div class="p-4">
+            <p>ASASAS</p>
+          </div>
+        </template>
+      </UPopover>
       <path
         d="M629.5 816.5L406.5 508.5"
         stroke-width="2"
@@ -312,10 +349,10 @@
 }
 
 #nodes > path {
-  @apply fill-custom-gray dark:fill-custom-black;
+  @apply fill-custom-gray hover:fill-custom-green dark:fill-custom-black dark:hover:fill-custom-green;
 }
 
 #numbers > path {
-  @apply fill-custom-dark dark:fill-custom-cyan;
+  @apply pointer-events-none fill-custom-dark dark:fill-custom-cyan;
 }
 </style>

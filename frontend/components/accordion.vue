@@ -71,7 +71,7 @@ const series = ref([
 ]);
 
 const options = computed(() => {
-  let isDark = useColorMode().value === "dark";
+  const isDark = useColorMode().value === "dark";
   const textColor = isDark ? "#68FCF1" : "#333";
 
   return {
@@ -132,7 +132,7 @@ const options = computed(() => {
 
 <template>
   <div
-    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-10"
+    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
   >
     <div
       v-for="(section, index) in sections"
