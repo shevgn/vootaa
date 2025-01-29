@@ -1,8 +1,7 @@
 <script setup lang="ts">
-
 type AccordionItem = {
   label: string | string[];
-}
+};
 
 defineProps<{
   items: AccordionItem[];
@@ -13,11 +12,81 @@ const activeSection = ref<number | null>(null);
 const toggleSection = (index: number) => {
   activeSection.value = activeSection.value === index ? null : index;
 };
+
+const series = ref([
+  {
+    name: "KDS",
+    data: [31, 40, 28, 51, 42, 109, 100],
+  },
+  {
+    name: "VOOTAA",
+    data: [11, 32, 45, 32, 34, 52, 41],
+  },
+]);
+
+const options = computed(() => {
+  const isDark = useColorMode().value === "dark";
+  const textColor = isDark ? "#68FCF1" : "#333";
+
+  return {
+    chart: {
+      type: "area",
+      toolbar: {
+        tools: {
+          download: false,
+        },
+      },
+      foreColor: textColor,
+    },
+    noData: {
+      text: "Loading...",
+    },
+    title: {
+      text: "Price Overview",
+      align: "left",
+      margin: 10,
+      offsetX: 0,
+      offsetY: 0,
+    },
+    legend: {
+      labels: {
+        useSeriesColors: true,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+    xaxis: {
+      type: "datetime",
+      categories: [
+        "2018-09-19T00:00:00.000Z",
+        "2018-09-19T01:30:00.000Z",
+        "2018-09-19T02:30:00.000Z",
+        "2018-09-19T03:30:00.000Z",
+        "2018-09-19T04:30:00.000Z",
+        "2018-09-19T05:30:00.000Z",
+        "2018-09-19T06:30:00.000Z",
+      ],
+      tooltip: {
+        enabled: false,
+      },
+    },
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+  };
+});
 </script>
 
 <template>
   <div
-    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-10"
+    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
   >
     <div
       v-for="(item, index) in items"
