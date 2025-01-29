@@ -85,26 +85,11 @@ const options = computed(() => {
 </script>
 
 <template>
-<<<<<<< HEAD
-  <div
-    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
-  >
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="mb-2 rounded-md border border-custom-dark dark:border-custom-cyan"
-    >
-      <button
-        class="flex w-full items-center justify-between bg-none p-4 text-left font-semibold focus:outline-none"
-        @click="toggleSection(index)"
-      >
-=======
   <div class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4">
     <div v-for="(item, index) in items" :key="index"
       class="mb-2 rounded-md border border-custom-dark dark:border-custom-cyan">
       <button class="flex w-full items-center justify-between bg-none p-4 text-left font-semibold focus:outline-none"
         @click="toggleSection(index)">
->>>>>>> 99f6bf6 (accordion logic separated)
         <template v-if="typeof item.label === 'string'">
           <span> {{ index + 1 }}: {{ item.label }} </span>
         </template>
@@ -115,19 +100,10 @@ const options = computed(() => {
           </span>
         </template>
       </button>
-<<<<<<< HEAD
-      <div
-        class="overflow-hidden transition-all duration-300"
-        :style="{ maxHeight: activeSection === index ? '350px' : '0' }"
-      >
-        <div
-          class="rounded bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
-        >
-=======
+
       <div class="overflow-hidden transition-all duration-300"
         :style="{ maxHeight: activeSection === index ? '350px' : '0' }">
         <div class="rounded bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200">
->>>>>>> 99f6bf6 (accordion logic separated)
           <slot />
         </div>
       </div>
