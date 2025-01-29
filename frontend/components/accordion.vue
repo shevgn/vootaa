@@ -100,6 +100,7 @@ const options = computed(() => {
           </span>
         </template>
       </button>
+
       <div class="overflow-hidden transition-all duration-300"
         :style="{ maxHeight: activeSection === index ? '350px' : '0' }">
         <div class="rounded bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200">
