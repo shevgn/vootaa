@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const chainStore = useChainStore();
+
 const props = defineProps({
   handleNodeHover: Function,
   handleNodeClick: Function,
@@ -6,11 +8,6 @@ const props = defineProps({
 
 onMounted(() => {
   const nodes = document.querySelectorAll("#nodes path");
-  const nodesGroup = document.querySelector("#nodes");
-
-  for (const node of nodes) {
-    nodesGroup?.replaceChild(node, node);
-  }
 
   let nodeId = 0;
   for (const node of nodes) {
@@ -37,14 +34,6 @@ onMounted(() => {
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="links">
-      <UPopover mode="hover">
-        <!-- Елемент тут -->
-        <template #panel>
-          <div class="p-4">
-            <p>ASASAS</p>
-          </div>
-        </template>
-      </UPopover>
       <path
         d="M629.5 816.5L406.5 508.5"
         stroke-width="2"
@@ -349,7 +338,7 @@ onMounted(() => {
 }
 
 #nodes > path {
-  @apply fill-custom-gray hover:fill-custom-green dark:fill-custom-black dark:hover:fill-custom-green;
+  @apply cursor-pointer fill-custom-gray hover:fill-custom-green dark:fill-custom-black dark:hover:fill-custom-green;
 }
 
 #numbers > path {
