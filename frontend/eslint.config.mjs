@@ -1,5 +1,13 @@
 // @ts-check
 import withNuxt from "./.nuxt/eslint.config.mjs";
+import eslintPluginPrettier from "eslint-plugin-prettier";
 
-export default withNuxt();
-// Your custom configs here
+export default withNuxt({
+    plugins: {
+        prettier: eslintPluginPrettier,
+    },
+    rules: {
+        "prettier/prettier": "error",
+        indent: "off",
+    },
+});

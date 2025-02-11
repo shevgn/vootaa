@@ -1,20 +1,19 @@
 <script setup lang="ts">
-
 const VueApexCharts = defineAsyncComponent(() => import("vue3-apexcharts"));
 
 type AccordionItem = {
-    label: string[];
+  label: string[];
 };
 
 const accordionItems: Ref<AccordionItem[], AccordionItem[]> = ref([
   {
-      label: ["$KDS - $VOOTAA", "112.341", "1.12", "66@C19"],
+    label: ["$KDS - $VOOTAA", "112.341", "1.12", "66@C19"],
   },
   {
-      label: ["$KDL - $VOOTAA", "15.523", "153", "10@C18"],
+    label: ["$KDL - $VOOTAA", "15.523", "153", "10@C18"],
   },
   {
-      label: ["CRKK - $VOOTAA", "1.288", "288", "21@C16"],
+    label: ["CRKK - $VOOTAA", "1.288", "288", "21@C16"],
   },
   {
     label: ["KDAV - $VOOTAA", "1.1377", "357", "19@C7"],
@@ -36,7 +35,7 @@ const series = ref([
 ]);
 
 const options = computed(() => {
-  let isDark = useColorMode().value === "dark";
+  const isDark = useColorMode().value === "dark";
   const textColor = isDark ? "#68FCF1" : "#333";
 
   return {
@@ -96,7 +95,7 @@ const options = computed(() => {
 </script>
 
 <template>
-  <Accordion :items="accordionItems" >
+  <Accordion :items="accordionItems">
     <ClientOnly>
       <VueApexCharts height="300" :options="options" :series="series" />
     </ClientOnly>
