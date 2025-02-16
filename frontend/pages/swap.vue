@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { chains as chainsMock } from "@/chains-mock";
 const chainStore = useChainStore();
+const route = useRoute();
+
+if (
+  (route.query.type !== "buy" && route.query.type !== "sell") ||
+  !route.query.token
+) {
+  navigateTo("/pool");
+}
 
 const amountForSwap: number[] = [
   10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 1660.0,
@@ -33,26 +42,19 @@ const showTransactionHint = (): void => {
   transactionHintShown.value = !transactionHintShown.value;
 };
 
-const chainsApi = [
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-  {
-    id: 3,
-  },
-  {
-    id: 4,
-  },
-  {
-    id: 5,
-  },
-];
-
-const chains = chainsApi.map((chain) => {
+const chains = chainsMock.map((chain) => {
   return `${chain.id}`;
+});
+
+const activeTokens = computed(() => {
+  return {
+    buy: route.query.type === "buy" ? route.query.token : "VOOTAA",
+    sell: route.query.type === "sell" ? route.query.token : "VOOTAA",
+  };
+});
+
+const anotherOperation = computed(() => {
+  return route.query.type === "buy" ? "sell" : "buy";
 });
 </script>
 <template>
@@ -60,18 +62,19 @@ const chains = chainsApi.map((chain) => {
     class="relative mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
   >
     <h2 class="sr-only">Swap block</h2>
-    <div
+    <section
       class="mb-4 flex h-12 w-full items-center justify-around rounded-md border border-custom-dark dark:border-custom-cyan"
     >
       <h3 class="sr-only">Choose currency</h3>
       <span>Swap your</span>
-      <span
+      <section
         class="flex h-full w-1/3 items-center justify-between bg-custom-dark px-2 font-semibold text-white dark:bg-custom-cyan dark:text-custom-dark"
       >
-        <span> $VOOTAA </span>
-        to
-        <span> $KDS </span>
-      </span>
+        <h4 class="sr-only">Active tokens</h4>
+        <span> ${{ activeTokens.sell }} </span>
+        <span>to</span>
+        <span> ${{ activeTokens.buy }} </span>
+      </section>
 
       <section class="flex items-center space-x-2">
         <span>on Chain</span>
@@ -85,13 +88,13 @@ const chains = chainsApi.map((chain) => {
           class="lg:hidden"
         />
       </section>
-      <button
-        type="button"
-        class="flex items-center rounded-md border border-custom-dark px-4 dark:border-custom-cyan"
+      <NuxtLink
+        :to="`/swap?type=${anotherOperation}&token=${route.query.token}`"
+        class="flex items-center justify-center rounded-md border border-custom-dark px-4 hover:scale-105 dark:border-custom-cyan"
       >
         <UIcon name="ic:baseline-swap-horiz" class="h-8 w-8" />
-      </button>
-    </div>
+      </NuxtLink>
+    </section>
     <div
       class="mb-4 flex h-full w-full flex-col items-center rounded-md border border-custom-dark p-1 text-custom-dark dark:border-custom-cyan dark:text-custom-cyan"
     >
