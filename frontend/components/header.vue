@@ -100,11 +100,11 @@ onMounted(() => {
             class="mr-4 border-b-2 border-custom-dark transition dark:border-custom-cyan"
             :class="
               path === '/swap'
-                ? 'border-opacity-100 dark:border-opacity-100'
-                : 'border-opacity-0 dark:border-opacity-0'
+                ? 'border-opacity-100 text-custom-dark dark:border-opacity-100 dark:text-custom-cyan'
+                : 'pointer-events-none border-opacity-0 text-custom-gray dark:border-opacity-0 dark:text-custom-green'
             "
           >
-            <NuxtLink to="/swap" class="">Swap</NuxtLink>
+            <NuxtLink to="/swap">Swap</NuxtLink>
           </li>
         </ul>
       </nav>
