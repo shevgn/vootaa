@@ -7,6 +7,7 @@ const toggleSection = (index: number) => {
 };
 
 type AccordionItem = {
+  token: string;
   pool: string;
   avgPrice: number;
   min: number;
@@ -16,6 +17,7 @@ type AccordionItem = {
 
 const items: AccordionItem[] = [
   {
+    token: "KDS",
     pool: "$KDS - $VOOTAA",
     avgPrice: 0.1256,
     min: 0.1221,
@@ -23,6 +25,7 @@ const items: AccordionItem[] = [
     content: {},
   },
   {
+    token: "KDL",
     pool: "$KDL - $VOOTAA",
     avgPrice: 0.1133,
     min: 0.1155,
@@ -69,9 +72,9 @@ const items: AccordionItem[] = [
         :style="{ maxHeight: activeSection === index ? '350px' : '0' }"
       >
         <div
-          class="flex flex-col rounded bg-gray-50 p-2 text-xs text-custom-cyan dark:bg-gray-800"
+          class="flex flex-col rounded bg-gray-50 p-2 text-xs text-custom-dark dark:bg-gray-800 dark:text-custom-cyan"
         >
-          <PoolLiquidity :token1="{ name: 'KDS' }" />
+          <PoolLiquidity :token1="{ name: `${item.token}` }" />
           <div
             v-if="!chainStore.selectedNode"
             class="flex h-20 items-center justify-center text-red-500"
@@ -79,12 +82,35 @@ const items: AccordionItem[] = [
             <UIcon name="ic:baseline-arrow-back" class="mr-4 h-8 w-8" />
             <p>Click The Chain ID Number In The Left ChainWeb Panel</p>
           </div>
-          <PoolLiquidity
-            v-else
-            :chain="chainStore.selectedNode"
-            :token1="{ value: 1022.333, name: 'KDS' }"
-            :token2="{ value: 126.611 }"
-          />
+          <template v-else>
+            <PoolLiquidity
+              :chain="chainStore.selectedNode"
+              :token1="{ value: 1022.333, name: `${item.token}` }"
+              :token2="{ value: 126.611 }"
+            />
+            <div
+              class="flex flex-row items-center justify-evenly py-4 text-base"
+            >
+              <span>
+                0.1228
+                <span class="text-xs text-red-500">
+                  @C{{ chainStore.selectedNode }}
+                </span>
+              </span>
+              <NuxtLink
+                :to="`/swap?type=buy&token=${item.token}`"
+                class="rounded-lg border border-custom-dark p-1 px-2 hover:scale-105 dark:border-custom-cyan"
+              >
+                BUY ${{ item.token }}
+              </NuxtLink>
+              <NuxtLink
+                :to="`/swap?type=sell&token=${item.token}`"
+                class="rounded-lg border border-custom-dark p-1 px-2 hover:scale-105 dark:border-custom-cyan"
+              >
+                SELL ${{ item.token }}
+              </NuxtLink>
+            </div>
+          </template>
         </div>
       </div>
     </div>
