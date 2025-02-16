@@ -1,10 +1,8 @@
 <script setup lang="ts">
-const chainStore = useChainStore();
-
-const props = defineProps({
-  handleNodeHover: Function,
-  handleNodeClick: Function,
-});
+const props = defineProps<{
+  handleNodeHover: (nodeId: number | null) => void;
+  handleNodeClick: (nodeId: number) => void;
+}>();
 
 onMounted(() => {
   const nodes = document.querySelectorAll("#nodes path");
@@ -14,13 +12,13 @@ onMounted(() => {
     node.id = nodeId.toString();
     nodeId++;
     node.addEventListener("mouseenter", () => {
-      if (props.handleNodeHover) props.handleNodeHover(node.id);
+      props.handleNodeHover(Number.parseInt(node.id));
     });
     node.addEventListener("mouseleave", () => {
-      if (props.handleNodeHover) props.handleNodeHover(null);
+      props.handleNodeHover(null);
     });
     node.addEventListener("click", () => {
-      if (props.handleNodeClick) props.handleNodeClick(node.id);
+      props.handleNodeClick(Number.parseInt(node.id));
     });
   }
 });
@@ -34,14 +32,6 @@ onMounted(() => {
     xmlns="http://www.w3.org/2000/svg"
   >
     <g id="links">
-      <UPopover mode="hover">
-        <!-- Елемент тут -->
-        <template #panel>
-          <div class="p-4">
-            <p>ASASAS</p>
-          </div>
-        </template>
-      </UPopover>
       <path
         d="M629.5 816.5L406.5 508.5"
         stroke-width="2"
