@@ -6,6 +6,11 @@ type Chain = {
 
 export const chains: Chain[] = [
     {
+        id: 0,
+        liquidity: 100,
+        price: 0.1222,
+    },
+    {
         id: 1,
         liquidity: 100,
         price: 0.1211,
