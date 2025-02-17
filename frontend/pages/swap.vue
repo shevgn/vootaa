@@ -79,10 +79,10 @@ const anotherOperation = computed(() => {
       <section class="flex items-center space-x-2">
         <span>on Chain</span>
         <span class="hidden text-red-400 lg:inline"
-          >#{{ chainStore.selectedNode || "None" }}</span
+          >#{{ chainStore.selectedNode?.toString() || "None" }}</span
         >
         <USelectMenu
-          v-if="chainStore.selectedNode"
+          v-if="chainStore.selectedNode !== null"
           v-model="chainStore.selectedNode"
           :options="chains"
           class="lg:hidden"

@@ -76,7 +76,7 @@ const items: AccordionItem[] = [
         >
           <PoolLiquidity :token1="{ name: `${item.token}` }" />
           <div
-            v-if="!chainStore.selectedNode"
+            v-if="chainStore.selectedNode === null"
             class="flex h-20 items-center justify-center text-red-500"
           >
             <UIcon name="ic:baseline-arrow-back" class="mr-4 h-8 w-8" />

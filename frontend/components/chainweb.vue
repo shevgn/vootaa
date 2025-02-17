@@ -23,7 +23,7 @@ const handleNodeClick = (nodeId: number) => {
       <span class="text-custom-dark dark:text-custom-cyan">
         CHAIN ID:
         <span class="text-red-400">
-          {{ chainStore.selectedNode || "None" }}
+          {{ chainStore.selectedNode?.toString() || "None" }}
         </span>
       </span>
     </div>
