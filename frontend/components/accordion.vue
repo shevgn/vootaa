@@ -18,6 +18,18 @@ const toggleSection = (index: number) => {
   <div
     class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
   >
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th class="w-2/5">POOLs</th>
+          <th class="w-1/5">Total TXs</th>
+          <th class="w-1/5">Last 7 Days</th>
+          <th class="w-1/12">Max</th>
+          <th class="" />
+        </tr>
+      </thead>
+    </table>
+
     <div
       v-for="(item, index) in items"
       :key="index"
@@ -28,14 +40,21 @@ const toggleSection = (index: number) => {
         @click="toggleSection(index)"
       >
         <template v-if="typeof item.label === 'string'">
-          <span> {{ index + 1 }}: {{ item.label }} </span>
+          <span>{{ index + 1 }}: </span>
+          <span>{{ item.label }}</span>
         </template>
         <template v-else>
-          <span> {{ index + 1 }}: {{ item.label[0] }} </span>
+          <span>{{ index + 1 }}: </span>
+          <span>{{ item.label[0] }}</span>
           <span v-for="(labelPart, index) in item.label.slice(1)" :key="index">
             {{ labelPart }}
           </span>
         </template>
+        <UIcon
+          name="ic:baseline-arrow-forward"
+          class="h-4 w-4 transition-all"
+          :class="activeSection === index ? 'rotate-90' : ''"
+        />
       </button>
 
       <div

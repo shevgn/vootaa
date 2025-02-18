@@ -12,7 +12,6 @@ type AccordionItem = {
   avgPrice: number;
   min: number;
   max: number;
-  content: unknown;
 };
 
 const items: AccordionItem[] = [
@@ -22,7 +21,6 @@ const items: AccordionItem[] = [
     avgPrice: 0.1256,
     min: 0.1221,
     max: 0.1258,
-    content: {},
   },
   {
     token: "KDL",
@@ -30,7 +28,27 @@ const items: AccordionItem[] = [
     avgPrice: 0.1133,
     min: 0.1155,
     max: 0.1122,
-    content: {},
+  },
+  {
+    token: "CRKK",
+    pool: "$CRKK - $VOOTAA",
+    avgPrice: 0.1511,
+    min: 0.1566,
+    max: 0.1311,
+  },
+  {
+    token: "KDAV",
+    pool: "$KDAV - $VOOTAA",
+    avgPrice: 1.1277,
+    min: 0.1298,
+    max: 0.1225,
+  },
+  {
+    token: "USDV",
+    pool: "$KDAV - $VOOTAA",
+    avgPrice: 1.1056,
+    min: 1.1158,
+    max: 1.1011,
   },
 ];
 </script>
@@ -38,12 +56,17 @@ const items: AccordionItem[] = [
   <div
     class="mx-auto flex h-full w-2/3 flex-col text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
   >
-    <div class="flex flex-row items-center justify-evenly">
-      <span>POOLs</span>
-      <span>Avg Price</span>
-      <span>Max</span>
-      <span>Min</span>
-    </div>
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th class="w-[40%]">POOLs</th>
+          <th class="w-1/6">Avg Price</th>
+          <th class="w-1/6">Max</th>
+          <th class="w-1/6">Min</th>
+          <th />
+        </tr>
+      </thead>
+    </table>
 
     <div
       v-for="(item, index) in items"
