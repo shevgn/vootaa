@@ -9,5 +9,6 @@ export default withNuxt({
     rules: {
         "prettier/prettier": "error",
         indent: "off",
+        "vue/html-self-closing": "off",
     },
 });
