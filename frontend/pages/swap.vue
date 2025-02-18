@@ -10,14 +10,6 @@ if (
   navigateTo("/pool");
 }
 
-const amountForSwap: number[] = [
-  10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 1660.0,
-];
-
-const percentageForSwap: number[] = [
-  0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
-];
-
 const selectedAmount = ref(0);
 
 const saveAmount = (amount: number): void => {
@@ -46,16 +38,60 @@ const chains = chainsMock.map((chain) => {
   return `${chain.id}`;
 });
 
-const activeTokens = computed(() => {
-  return {
-    buy: route.query.type === "buy" ? route.query.token : "VOOTAA",
-    sell: route.query.type === "sell" ? route.query.token : "VOOTAA",
-  };
-});
-
 const anotherOperation = computed(() => {
   return route.query.type === "buy" ? "sell" : "buy";
 });
+
+type AvailableTokens = "VOOTAA" | "KDS" | "KDL" | "CRKK" | "KDAV" | "USDV";
+
+const userBalance = reactive<Record<AvailableTokens, number>>({
+  VOOTAA: 3245.58,
+  KDS: 56799.17,
+  KDL: 0,
+  CRKK: 0,
+  KDAV: 0,
+  USDV: 0,
+});
+
+const poolLiquidity = reactive<Record<AvailableTokens, number>>({
+  VOOTAA: 162513.96,
+  KDS: 1310190.22,
+  KDL: 0,
+  CRKK: 0,
+  KDAV: 0,
+  USDV: 0,
+});
+
+const activeTokens = computed(() => {
+  const token = route.query.token as AvailableTokens;
+  return {
+    buy: route.query.type === "buy" ? token : "VOOTAA",
+    sell: route.query.type === "sell" ? token : "VOOTAA",
+  };
+});
+
+const getUserBalance = (token: AvailableTokens): number =>
+  userBalance[token] ?? 0;
+
+const getPoolLiquidity = (token: AvailableTokens): number =>
+  poolLiquidity[token] ?? 0;
+
+const amountForSwap = computed((): number[] => {
+  const nonVootaaMultiplier = activeTokens.value.sell === "VOOTAA" ? 1 : 10;
+  const amounts: number[] = [10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0];
+
+  const finalAmounts = amounts.map((amount) => {
+    return (amount *= nonVootaaMultiplier);
+  });
+
+  finalAmounts.push(getPoolLiquidity(activeTokens.value.sell) * 0.01);
+
+  return finalAmounts;
+});
+
+const percentageForSwap: number[] = [
+  0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
+];
 </script>
 <template>
   <div
@@ -105,17 +141,25 @@ const anotherOperation = computed(() => {
           <span>Pool liquidity:</span>
         </div>
         <div class="flex flex-col justify-center text-center">
-          <span>3,245.58</span>
+          <span>
+            {{ getUserBalance(activeTokens.sell).toLocaleString() }}
+          </span>
           <hr />
-          <span>162,513.96</span>
+          <span>
+            {{ getPoolLiquidity(activeTokens.sell).toLocaleString() }}
+          </span>
         </div>
-        <span>$VOOTAA</span>
+        <span>${{ activeTokens.sell }}</span>
         <div class="flex flex-col justify-center text-center">
-          <span>56,799.17</span>
+          <span>
+            {{ getUserBalance(activeTokens.buy).toLocaleString() }}
+          </span>
           <hr />
-          <span>1,310,190.22</span>
+          <span>
+            {{ getPoolLiquidity(activeTokens.buy).toLocaleString() }}
+          </span>
         </div>
-        <span>$KDS</span>
+        <span>${{ activeTokens.buy }}</span>
       </div>
       <hr class="w-full" />
       <div class="h-full w-full p-2">
@@ -169,7 +213,7 @@ const anotherOperation = computed(() => {
               @click="saveAmount(amount)"
             >
               <span>
-                {{ amount.toFixed(1) }}
+                {{ amount.toLocaleString() }}
               </span>
             </button>
           </div>
@@ -180,12 +224,18 @@ const anotherOperation = computed(() => {
               v-for="percentage in percentageForSwap"
               :key="percentage"
               type="button"
-              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 text-sm hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
-              :class="
-                selectedAmount === percentage
-                  ? 'border-opacity-100 dark:border-opacity-100'
-                  : ''
+              :disabled="
+                userBalance[activeTokens.sell] * percentage >=
+                last(amountForSwap)
               "
+              class="flex items-center justify-center rounded-md border border-custom-dark border-opacity-0 p-1 text-sm hover:border-opacity-100 dark:border-custom-cyan dark:border-opacity-0 dark:hover:border-opacity-100"
+              :class="{
+                'border-opacity-100 dark:border-opacity-100':
+                  selectedAmount === percentage,
+                'text-custom-gray dark:text-custom-green':
+                  userBalance[activeTokens.sell] * percentage >=
+                  last(amountForSwap),
+              }"
               @click="saveAmount(percentage)"
             >
               <span> {{ percentage * 100 }}% </span>
