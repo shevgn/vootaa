@@ -101,3 +101,9 @@ const options = computed(() => {
     </ClientOnly>
   </Accordion>
 </template>
+
+<style>
+.apexcharts-tooltip-series-group > span.apexcharts-tooltip-marker {
+  width: fit-content !important;
+}
+</style>
