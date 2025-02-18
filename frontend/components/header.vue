@@ -71,7 +71,7 @@ onMounted(() => {
     <div class="flex w-full justify-between">
       <nav class="relative flex items-center">
         <ul
-          class="flex flex-row items-center space-x-8 text-custom-dark dark:text-custom-cyan"
+          class="flex flex-row items-center space-x-4 text-custom-dark dark:text-custom-cyan lg:space-x-8"
         >
           <li class="mr-4">
             <NuxtLink to="/" class="text-xl">Vootaa</NuxtLink>
@@ -104,7 +104,9 @@ onMounted(() => {
                 : 'pointer-events-none border-opacity-0 text-custom-gray dark:border-opacity-0 dark:text-custom-green'
             "
           >
-            <NuxtLink to="/swap">Swap</NuxtLink>
+            <NuxtLink :to="{ path: '/swap', query: route.query }"
+              >Swap</NuxtLink
+            >
           </li>
         </ul>
       </nav>
