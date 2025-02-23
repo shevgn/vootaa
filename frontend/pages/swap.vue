@@ -14,7 +14,6 @@ const selectedAmount = ref(0);
 
 const saveAmount = (amount: number): void => {
   selectedAmount.value = amount;
-  console.log(amount);
 };
 
 const minHintShown = ref(false);
@@ -92,6 +91,45 @@ const amountForSwap = computed((): number[] => {
 const percentageForSwap: number[] = [
   0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
 ];
+
+const originalAmount = computed(() => {
+  if (selectedAmount.value === 0) {
+    return 0;
+  }
+
+  if (selectedAmount.value < 1) {
+    return selectedAmount.value * getUserBalance(activeTokens.value.sell);
+  } else {
+    return selectedAmount.value;
+  }
+});
+
+const PLATFORM_FEE = 0.03;
+
+const amountToReceive = computed(() => {
+  return originalAmount.value * (1 - PLATFORM_FEE);
+});
+
+type FormattedAmount = {
+  wholePart: string;
+  pennyPart: string;
+};
+
+const formatResultAmount = (amount: number): FormattedAmount => {
+  const splitted = amount.toFixed(4).toString().split(".");
+
+  return {
+    wholePart: splitted[0],
+    pennyPart: splitted[1],
+  };
+};
+
+watch(
+  () => route.query.type,
+  () => {
+    selectedAmount.value = 0;
+  }
+);
 </script>
 <template>
   <div
@@ -256,15 +294,19 @@ const percentageForSwap: number[] = [
               <span>8.0116 $KDS</span>
             </p>
             <p>
-              3% Platform Fee:
-              <span>156.1011 $KDS</span>
+              {{ PLATFORM_FEE * 100 }}% Platform Fee:
+              <span>{{ (originalAmount * PLATFORM_FEE).toFixed(4) }} $KDS</span>
             </p>
           </div>
         </div>
-        <div class="flex w-full items-center justify-evenly px-6 py-2">
+        <div class="flex w-full items-center justify-evenly p-2">
           <div>
-            <span class="text-3xl">649.</span>
-            <span class="pr-4">0543</span>
+            <span class="text-3xl">
+              {{ formatResultAmount(originalAmount).wholePart }}.
+            </span>
+            <span class="pr-4">
+              {{ formatResultAmount(originalAmount).pennyPart }}
+            </span>
             <span>$VOOTAA</span>
           </div>
           <UIcon
@@ -272,14 +314,19 @@ const percentageForSwap: number[] = [
             class="h-8 w-8 bg-custom-dark dark:bg-custom-cyan"
           />
           <div>
-            <span class="text-3xl">5055.</span>
-            <span class="pr-4">0543</span>
+            <span class="text-3xl">
+              {{ formatResultAmount(amountToReceive).wholePart }}.
+            </span>
+            <span class="pr-4">
+              {{ formatResultAmount(amountToReceive).pennyPart }}
+            </span>
             <span>$KDS</span>
           </div>
         </div>
       </div>
     </div>
     <button
+      :disabled="originalAmount <= 0"
       type="button"
       class="flex h-full w-full items-center justify-center rounded-md border border-custom-dark bg-transparent p-4 dark:border-none dark:bg-custom-cyan"
     >
