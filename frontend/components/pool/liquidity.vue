@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  title?: string;
   chain?: number;
   token1: {
     value?: number;
@@ -13,7 +14,7 @@ defineProps<{
 <template>
   <div class="flex items-center justify-around py-1">
     <span>
-      Liquidity
+      {{ title ? title : "Liquidity" }}
       <sub v-if="!chain"> (Chain 0 - 19) </sub>
       <sub v-else>(Chain #{{ chain }})</sub>
     </span>
