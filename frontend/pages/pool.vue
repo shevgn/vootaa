@@ -59,7 +59,7 @@ const items: AccordionItem[] = [
     <table class="w-full">
       <thead>
         <tr>
-          <th class="w-[40%]">POOLs</th>
+          <th class="w-2/5">POOLs</th>
           <th class="w-1/6">Avg Price</th>
           <th class="w-1/6">Max</th>
           <th class="w-1/6">Min</th>
