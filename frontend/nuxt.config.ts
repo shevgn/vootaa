@@ -12,6 +12,7 @@ export default defineNuxtConfig({
         "@nuxt/eslint",
         "@nuxt/test-utils/module",
         "@pinia/nuxt",
+        "@formkit/auto-animate",
     ],
     alias: {
         "#tailwind-config": resolve("./tailwind.config"),

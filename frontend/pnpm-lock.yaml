@@ -7,6 +7,9 @@ settings:
 importers:
     .:
         dependencies:
+            "@formkit/auto-animate":
+                specifier: ^0.8.2
+                version: 0.8.2
             "@nuxtjs/color-mode":
                 specifier: 3.5.2
                 version: 3.5.2(magicast@0.3.5)
@@ -699,6 +702,12 @@ packages:
                 integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==,
             }
         engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
+
+    "@formkit/auto-animate@0.8.2":
+        resolution:
+            {
+                integrity: sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==,
+            }
 
     "@headlessui/tailwindcss@0.2.2":
         resolution:
@@ -7962,6 +7971,8 @@ snapshots:
         dependencies:
             "@eslint/core": 0.10.0
             levn: 0.4.1
+
+    "@formkit/auto-animate@0.8.2": {}
 
     "@headlessui/tailwindcss@0.2.2(tailwindcss@3.4.17)":
         dependencies:
