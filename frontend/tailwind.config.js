@@ -11,6 +11,9 @@ export default {
                     black: "#0B0C10",
                 },
             },
+            fontSize: {
+                "2xs": ["0.625rem", { lineHeight: "1rem" }],
+            },
         },
     },
     content: [
