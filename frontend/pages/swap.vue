@@ -97,7 +97,7 @@ const originalAmount = computed(() => {
     return 0;
   }
 
-  if (selectedAmount.value < 1) {
+  if (selectedAmount.value <= 1) {
     return selectedAmount.value * getUserBalance(activeTokens.value.sell);
   } else {
     return selectedAmount.value;
