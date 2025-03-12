@@ -330,7 +330,15 @@ watch(
       type="button"
       class="flex h-full w-full items-center justify-center rounded-md border border-custom-dark bg-transparent p-4 dark:border-none dark:bg-custom-cyan"
     >
-      <span class="text-4xl font-semibold dark:text-custom-dark">SWAP</span>
+      <p class="text-custom-dark">
+        <span class="text-4xl font-semibold">SWAP</span>
+        <sub>
+          {
+          {{ capitalize(route.query.type?.toString() ?? "") }}
+          {{ route.query.token }}
+          }
+        </sub>
+      </p>
     </button>
     <div class="mt-4 flex h-full w-full flex-row justify-end space-x-4">
       <p
