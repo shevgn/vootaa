@@ -18,7 +18,10 @@ defineProps<{
     <span>
       {{ title ? title : "Liquidity" }}
       <sub v-if="chain === undefined"> (Chain 0 - 19) </sub>
-      <sub v-else>(Chain #{{ chain }})</sub>
+      <sub v-else>
+        (Chain <span class="text-red-600">#{{ chain }}</span
+        >)
+      </sub>
     </span>
     <span v-if="token1.value === undefined">
       12,345,566.77 ${{ token1.name }}
