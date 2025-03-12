@@ -119,7 +119,7 @@ onMounted(() => {
           />
         </form>
         <button
-          class="rounded-lg border border-custom-dark p-1 px-2 hover:bg-gray-100 dark:border-custom-cyan dark:hover:bg-custom-dark"
+          class="rounded-lg border border-custom-dark p-1 px-2 hover:bg-gray-200 dark:border-custom-cyan dark:hover:bg-gray-600"
         >
           <span
             class="text-sm text-custom-dark dark:text-custom-cyan lg:text-base"
