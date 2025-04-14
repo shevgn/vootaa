@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Token } from "~/types/tokens";
+
 const chainStore = useChainStore();
 const activeSection = ref<number | null>(null);
 
@@ -7,7 +9,7 @@ const toggleSection = (index: number) => {
 };
 
 type AccordionItem = {
-  token: string;
+  token: Token;
   pool: string;
   avgPrice: number;
   min: number;
