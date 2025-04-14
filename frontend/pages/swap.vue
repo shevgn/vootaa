@@ -2,6 +2,7 @@
 import { chains as chainsMock } from "@/chains-mock";
 import type { Token } from "~/types/tokens";
 const chainStore = useChainStore();
+const tokensStore = useTokensStore();
 const route = useRoute();
 
 if (
@@ -225,9 +226,16 @@ watch(
             </p>
             <p>
               1
-              <span>$VOOTAA</span>
+              <span>${{ activeTokens.sell }}</span>
               =
-              <span>8.0116 $KDS</span>
+              <span>
+                {{
+                  tokensStore
+                    .getExchangeRate(activeTokens.buy, activeTokens.sell)
+                    .toFixed(4)
+                }}
+                ${{ activeTokens.buy }}
+              </span>
             </p>
             <p>
               {{ PLATFORM_FEE * 100 }}% Platform Fee:
