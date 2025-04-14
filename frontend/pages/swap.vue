@@ -17,17 +17,6 @@ const saveAmount = (amount: number): void => {
   selectedAmount.value = amount;
 };
 
-const minHintShown = ref(false);
-const maxHintShown = ref(false);
-
-const showMinHint = (): void => {
-  minHintShown.value = !minHintShown.value;
-};
-
-const showMaxHint = (): void => {
-  maxHintShown.value = !maxHintShown.value;
-};
-
 const chains = chainsMock.map((chain) => {
   return `${chain.id}`;
 });
@@ -183,38 +172,8 @@ watch(
           <div
             class="relative col-span-2 row-span-1 mb-4 flex w-full items-center justify-evenly border-b border-custom-dark p-4 pb-1 dark:border-custom-cyan"
           >
-            <button
-              type="button"
-              class="absolute left-1 top-0 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
-              @click="showMinHint"
-            >
-              <UIcon
-                name="ic:baseline-question-mark"
-                class="h-3 w-3 text-custom-cyan dark:bg-custom-dark"
-              />
-            </button>
-            <p
-              v-if="minHintShown"
-              class="absolute -top-1 left-8 text-xs font-medium text-red-500"
-            >
-              Limit the minimum amout to {{ amountForSwap[0] }}
-            </p>
-            <button
-              type="button"
-              class="absolute right-1 top-0 flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
-              @click="showMaxHint"
-            >
-              <UIcon
-                name="ic:baseline-question-mark"
-                class="h-3 w-3 text-custom-cyan dark:bg-custom-dark"
-              />
-            </button>
-            <p
-              v-if="maxHintShown"
-              class="absolute -top-1 right-8 text-xs font-medium text-red-500"
-            >
-              Limit to 1% of pool size
-            </p>
+            <SwapMinAmountHint :min-amount="amountForSwap[0]" />
+            <SwapMaxAmountHint />
             <button
               v-for="amount in amountForSwap"
               :key="amount"
