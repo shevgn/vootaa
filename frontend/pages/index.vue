@@ -1,31 +1,51 @@
 <script setup lang="ts">
+import type { Token } from "~/types/tokens";
+
 const VueApexCharts = defineAsyncComponent(() => import("vue3-apexcharts"));
 
-const activeSection = ref<number | null>(null);
-
-const toggleSection = (index: number) => {
-  activeSection.value = activeSection.value === index ? null : index;
-};
-
 type AccordionItem = {
-  label: string[];
+  token: Token;
+  pool: string;
+  totalTxs: number;
+  last7Days: number;
+  max: string;
 };
 
 const items = ref<AccordionItem[]>([
   {
-    label: ["$KDS - $VOOTAA", "112.341", "1.12", "66@C19"],
+    token: "KDS",
+    pool: "$KDS - $VOOTAA",
+    totalTxs: 112.341,
+    last7Days: 1.12,
+    max: "66@C19",
   },
   {
-    label: ["$KDL - $VOOTAA", "15.523", "153", "10@C18"],
+    token: "KDL",
+    pool: "$KDL - $VOOTAA",
+    totalTxs: 15.523,
+    last7Days: 153,
+    max: "10@C18",
   },
   {
-    label: ["CRKK - $VOOTAA", "1.288", "288", "21@C16"],
+    token: "CRKK",
+    pool: "$CRKK - $VOOTAA",
+    totalTxs: 1.288,
+    last7Days: 288,
+    max: "21@C16",
   },
   {
-    label: ["KDAV - $VOOTAA", "1.1377", "357", "19@C7"],
+    token: "KDAV",
+    pool: "$KDAV - $VOOTAA",
+    totalTxs: 1.1377,
+    last7Days: 357,
+    max: "19@C7",
   },
   {
-    label: ["$USDV - $VOOTAA", "1.466", "463", "25@C0"],
+    token: "USDV",
+    pool: "$USDV - $VOOTAA",
+    totalTxs: 1.466,
+    last7Days: 463,
+    max: "25@C0",
   },
 ]);
 
@@ -101,62 +121,46 @@ const options = computed(() => {
 </script>
 
 <template>
-  <div
-    class="mx-auto h-full w-2/3 text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
-  >
-    <table class="w-full">
-      <thead>
-        <tr>
-          <th class="w-2/5">POOLs</th>
-          <th class="w-1/5">Total TXs</th>
-          <th class="w-1/5">Last 7 Days</th>
-          <th class="w-1/12">Max</th>
-          <th class="" />
-        </tr>
-      </thead>
-    </table>
-
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="mb-2 rounded-md border border-custom-dark dark:border-custom-cyan"
-    >
-      <button
-        class="flex w-full items-center justify-between bg-none p-4 text-left font-semibold focus:outline-none"
-        @click="toggleSection(index)"
-      >
-        <template v-if="typeof item.label === 'string'">
-          <span>{{ index + 1 }}: </span>
-          <span>{{ item.label }}</span>
-        </template>
-        <template v-else>
-          <span>{{ index + 1 }}: </span>
-          <span>{{ item.label[0] }}</span>
-          <span v-for="(labelPart, index) in item.label.slice(1)" :key="index">
-            {{ labelPart }}
-          </span>
-        </template>
-        <UIcon
-          name="ic:baseline-arrow-forward"
-          class="h-4 w-4 transition-all"
-          :class="activeSection === index ? 'rotate-90' : ''"
-        />
-      </button>
-
-      <div
-        class="overflow-hidden transition-all duration-300"
-        :style="{ maxHeight: activeSection === index ? '350px' : '0' }"
-      >
-        <div
-          class="rounded bg-gray-50 p-2 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
-        >
-          <ClientOnly>
-            <VueApexCharts height="300" :options="options" :series="series" />
-          </ClientOnly>
-        </div>
-      </div>
-    </div>
-  </div>
+  <BaseAccordion :items="items">
+    <template #heading>
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="w-2/5">POOLs</th>
+            <th class="w-1/5">Total TXs</th>
+            <th class="w-1/5">Last 7 Days</th>
+            <th class="w-1/12">Max</th>
+            <th class="" />
+          </tr>
+        </thead>
+      </table>
+    </template>
+    <template #content-0>
+      <ClientOnly>
+        <VueApexCharts height="300" :options="options" :series="series" />
+      </ClientOnly>
+    </template>
+    <template #content-1>
+      <ClientOnly>
+        <VueApexCharts height="300" :options="options" :series="series" />
+      </ClientOnly>
+    </template>
+    <template #content-2>
+      <ClientOnly>
+        <VueApexCharts height="300" :options="options" :series="series" />
+      </ClientOnly>
+    </template>
+    <template #content-3>
+      <ClientOnly>
+        <VueApexCharts height="300" :options="options" :series="series" />
+      </ClientOnly>
+    </template>
+    <template #content-4>
+      <ClientOnly>
+        <VueApexCharts height="300" :options="options" :series="series" />
+      </ClientOnly>
+    </template>
+  </BaseAccordion>
 </template>
 
 <style>
