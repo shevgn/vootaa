@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { chains as chainsMock } from "@/chains-mock";
+import type { Token } from "~/types/tokens";
 const chainStore = useChainStore();
 const route = useRoute();
 
@@ -27,12 +28,6 @@ const showMaxHint = (): void => {
   maxHintShown.value = !maxHintShown.value;
 };
 
-const transactionHintShown = ref(false);
-
-const showTransactionHint = (): void => {
-  transactionHintShown.value = !transactionHintShown.value;
-};
-
 const chains = chainsMock.map((chain) => {
   return `${chain.id}`;
 });
@@ -41,9 +36,7 @@ const anotherOperation = computed(() => {
   return route.query.type === "buy" ? "sell" : "buy";
 });
 
-type AvailableTokens = "VOOTAA" | "KDS" | "KDL" | "CRKK" | "KDAV" | "USDV";
-
-const userBalance = reactive<Record<AvailableTokens, number>>({
+const userBalance = reactive<Record<Token, number>>({
   VOOTAA: 3245.58,
   KDS: 56799.17,
   KDL: 0,
@@ -52,7 +45,7 @@ const userBalance = reactive<Record<AvailableTokens, number>>({
   USDV: 0,
 });
 
-const poolLiquidity = reactive<Record<AvailableTokens, number>>({
+const poolLiquidity = reactive<Record<Token, number>>({
   VOOTAA: 162513.96,
   KDS: 1310190.22,
   KDL: 0,
@@ -62,18 +55,16 @@ const poolLiquidity = reactive<Record<AvailableTokens, number>>({
 });
 
 const activeTokens = computed(() => {
-  const token = route.query.token as AvailableTokens;
+  const token = route.query.token as Token;
   return {
     buy: route.query.type === "buy" ? token : "VOOTAA",
     sell: route.query.type === "sell" ? token : "VOOTAA",
   };
 });
 
-const getUserBalance = (token: AvailableTokens): number =>
-  userBalance[token] ?? 0;
+const getUserBalance = (token: Token): number => userBalance[token] ?? 0;
 
-const getPoolLiquidity = (token: AvailableTokens): number =>
-  poolLiquidity[token] ?? 0;
+const getPoolLiquidity = (token: Token): number => poolLiquidity[token] ?? 0;
 
 const amountForSwap = computed((): number[] => {
   const nonVootaaMultiplier = activeTokens.value.sell === "VOOTAA" ? 1 : 10;
@@ -109,20 +100,6 @@ const PLATFORM_FEE = 0.03;
 const amountToReceive = computed(() => {
   return originalAmount.value * (1 - PLATFORM_FEE);
 });
-
-type FormattedAmount = {
-  wholePart: string;
-  pennyPart: string;
-};
-
-const formatResultAmount = (amount: number): FormattedAmount => {
-  const splitted = amount.toFixed(4).toString().split(".");
-
-  return {
-    wholePart: splitted[0],
-    pennyPart: splitted[1],
-  };
-};
 
 watch(
   () => route.query.type,
@@ -299,30 +276,14 @@ watch(
             </p>
           </div>
         </div>
-        <div class="flex w-full items-center justify-evenly p-2">
-          <div>
-            <span class="text-3xl">
-              {{ formatResultAmount(originalAmount).wholePart }}.
-            </span>
-            <span class="pr-4">
-              {{ formatResultAmount(originalAmount).pennyPart }}
-            </span>
-            <span>$VOOTAA</span>
-          </div>
-          <UIcon
-            name="ic:baseline-keyboard-double-arrow-right"
-            class="h-8 w-8 bg-custom-dark dark:bg-custom-cyan"
-          />
-          <div>
-            <span class="text-3xl">
-              {{ formatResultAmount(amountToReceive).wholePart }}.
-            </span>
-            <span class="pr-4">
-              {{ formatResultAmount(amountToReceive).pennyPart }}
-            </span>
-            <span>$KDS</span>
-          </div>
-        </div>
+        <SwapResultAmount
+          :original-amount="originalAmount"
+          :amount-to-receive="amountToReceive"
+          :tokens="{
+            tokenToSell: activeTokens.sell,
+            tokenToBuy: activeTokens.buy,
+          }"
+        />
       </div>
     </div>
     <button
@@ -340,28 +301,7 @@ watch(
         </sub>
       </p>
     </button>
-    <div class="mt-4 flex h-full w-full flex-row justify-end space-x-4">
-      <p
-        v-if="transactionHintShown"
-        class="text-right text-xs font-medium text-custom-cyan"
-      >
-        The default transaction expiration time is 10 minutes,
-        <br />
-        the default transaction time is 20 minutes,
-        <br />
-        and the default price slippage is 0.75%.
-      </p>
-      <button
-        type="button"
-        class="flex size-5 items-center justify-center rounded-full bg-custom-dark dark:bg-custom-cyan"
-        @click="showTransactionHint"
-      >
-        <UIcon
-          name="ic:baseline-question-mark"
-          class="h-3 w-3 text-custom-cyan dark:bg-custom-dark"
-        />
-      </button>
-    </div>
+    <SwapTransactionHint />
   </div>
 </template>
 
