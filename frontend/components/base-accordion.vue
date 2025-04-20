@@ -8,6 +8,7 @@ const toggleSection = (index: number) => {
 defineProps<{
   items: Record<string, unknown>[];
   fieldStyles?: Record<string, string>;
+  sameSlot?: boolean;
 }>();
 
 const omitKeys = (object: object, keys: string[]): object => {
@@ -58,7 +59,8 @@ const omitKeys = (object: object, keys: string[]): object => {
         <div
           class="flex flex-col rounded bg-gray-50 p-2 text-sm text-custom-dark dark:bg-gray-800 dark:text-custom-cyan"
         >
-          <slot :name="`content-${index}`" />
+          <slot v-if="sameSlot === true" v-bind="item" />
+          <slot v-else :name="`content-${index}`" />
         </div>
       </div>
     </div>
