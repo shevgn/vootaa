@@ -100,8 +100,9 @@ const fieldStyles = {
   liquiduty: "text-xs break-words",
 };
 </script>
+
 <template>
-  <BaseAccordion :items="items" :field-styles="fieldStyles">
+  <BaseAccordion :items="items" :field-styles="fieldStyles" :same-slot="true">
     <template #heading>
       <table class="w-full">
         <thead>
@@ -113,40 +114,11 @@ const fieldStyles = {
         </thead>
       </table>
     </template>
-    <template #content-0>
+    <template #default="{ token }">
       <LiquidityAccordionContent
         :pools-liquidities="poolsLiquidities"
         :user-liquidities="userLiquidities"
-        token="KDS"
-      />
-    </template>
-
-    <template #content-1>
-      <LiquidityAccordionContent
-        :pools-liquidities="poolsLiquidities"
-        :user-liquidities="userLiquidities"
-        token="KDL"
-      />
-    </template>
-    <template #content-2>
-      <LiquidityAccordionContent
-        :pools-liquidities="poolsLiquidities"
-        :user-liquidities="userLiquidities"
-        token="CRKK"
-      />
-    </template>
-    <template #content-3>
-      <LiquidityAccordionContent
-        :pools-liquidities="poolsLiquidities"
-        :user-liquidities="userLiquidities"
-        token="KDAV"
-      />
-    </template>
-    <template #content-4>
-      <LiquidityAccordionContent
-        :pools-liquidities="poolsLiquidities"
-        :user-liquidities="userLiquidities"
-        token="USDV"
+        :token="token as Token"
       />
     </template>
   </BaseAccordion>
