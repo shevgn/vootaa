@@ -85,7 +85,7 @@ const selectedLiquidityAmount = ref<number>(0.5);
           selected)</sub
         >
       </span>
-      <span> 192,233.32 $KDS </span>
+      <span>192,233.32 ${{ token }}</span>
       <span> - </span>
       <span>10,111.19 $VOOTAA</span>
     </div>
