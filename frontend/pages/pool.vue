@@ -2,11 +2,6 @@
 import type { Token } from "~/types/tokens";
 
 const chainStore = useChainStore();
-const activeSection = ref<number | null>(null);
-
-const toggleSection = (index: number) => {
-  activeSection.value = activeSection.value === index ? null : index;
-};
 
 type AccordionItem = {
   token: Token;
@@ -47,7 +42,7 @@ const items: AccordionItem[] = [
   },
   {
     token: "USDV",
-    pool: "$KDAV - $VOOTAA",
+    pool: "$USDV - $VOOTAA",
     avgPrice: 1.1056,
     min: 1.1158,
     max: 1.1011,
@@ -55,83 +50,50 @@ const items: AccordionItem[] = [
 ];
 </script>
 <template>
-  <div
-    class="mx-auto flex h-full w-2/3 flex-col text-custom-dark dark:text-custom-cyan lg:w-full lg:px-4"
-  >
-    <table class="w-full">
-      <thead>
-        <tr>
-          <th class="w-2/5">POOLs</th>
-          <th class="w-1/6">Avg Price</th>
-          <th class="w-1/6">Max</th>
-          <th class="w-1/6">Min</th>
-          <th />
-        </tr>
-      </thead>
-    </table>
-
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="mb-2 rounded-md border border-custom-dark dark:border-custom-cyan"
-    >
-      <button
-        class="flex w-full items-center justify-between bg-none p-4 text-left font-semibold focus:outline-none"
-        @click="toggleSection(index)"
-      >
-        <span>{{ index + 1 }}: </span>
-        <span>{{ item.pool }}</span>
-        <span>{{ item.avgPrice }}</span>
-        <span>{{ item.max }}</span>
-        <span>{{ item.min }}</span>
-
-        <UIcon
-          name="ic:baseline-arrow-forward"
-          class="h-4 w-4 transition-all"
-          :class="activeSection === index ? 'rotate-90' : ''"
+  <BaseAccordion :items="items" :same-slot="true">
+    <template #heading>
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="w-2/5">POOLs</th>
+            <th class="w-1/6">Avg Price</th>
+            <th class="w-1/6">Max</th>
+            <th class="w-1/6">Min</th>
+            <th />
+          </tr>
+        </thead>
+      </table>
+    </template>
+    <template #default="{ token }">
+      <PoolLiquidity :token1="{ name: token as Token }" />
+      <SelectChainHint v-if="chainStore.selectedNode === null" />
+      <template v-else>
+        <PoolLiquidity
+          :chain="chainStore.selectedNode"
+          :token1="{ value: 1022.333, name: token as Token }"
+          :token2="{ value: 126.611 }"
         />
-      </button>
-
-      <div
-        class="overflow-hidden transition-all duration-300"
-        :style="{ maxHeight: activeSection === index ? '350px' : '0' }"
-      >
-        <div
-          class="flex flex-col rounded bg-gray-50 p-2 text-xs text-custom-dark dark:bg-gray-800 dark:text-custom-cyan"
-        >
-          <PoolLiquidity :token1="{ name: `${item.token}` }" />
-          <SelectChainHint v-if="chainStore.selectedNode === null" />
-          <template v-else>
-            <PoolLiquidity
-              :chain="chainStore.selectedNode"
-              :token1="{ value: 1022.333, name: `${item.token}` }"
-              :token2="{ value: 126.611 }"
-            />
-            <div
-              class="flex flex-row items-center justify-evenly py-4 text-base"
-            >
-              <span>
-                0.1228
-                <span class="text-xs text-red-500">
-                  @C{{ chainStore.selectedNode }}
-                </span>
-              </span>
-              <NuxtLink
-                :to="`/swap?type=buy&token=${item.token}`"
-                class="rounded-lg border border-custom-dark p-1 px-2 hover:scale-105 dark:border-custom-cyan"
-              >
-                BUY ${{ item.token }}
-              </NuxtLink>
-              <NuxtLink
-                :to="`/swap?type=sell&token=${item.token}`"
-                class="rounded-lg border border-custom-dark p-1 px-2 hover:scale-105 dark:border-custom-cyan"
-              >
-                SELL ${{ item.token }}
-              </NuxtLink>
-            </div>
-          </template>
+        <div class="flex flex-row items-center justify-evenly py-4 text-base">
+          <span>
+            0.1228
+            <span class="text-xs text-red-500">
+              @C{{ chainStore.selectedNode }}
+            </span>
+          </span>
+          <NuxtLink
+            :to="`/swap?type=buy&token=${token}`"
+            class="rounded-lg border border-custom-dark p-1 px-2 hover:scale-105 dark:border-custom-cyan"
+          >
+            BUY ${{ token }}
+          </NuxtLink>
+          <NuxtLink
+            :to="`/swap?type=sell&token=${token}`"
+            class="rounded-lg border border-custom-dark p-1 px-2 hover:scale-105 dark:border-custom-cyan"
+          >
+            SELL ${{ token }}
+          </NuxtLink>
         </div>
-      </div>
-    </div>
-  </div>
+      </template>
+    </template>
+  </BaseAccordion>
 </template>
